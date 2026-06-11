@@ -156,13 +156,13 @@ tapara gives your business a customer base with built-in loyalty, customer recog
 <label class="font-label text-xs uppercase tracking-widest text-outline block mb-2" for="est-sales">Monthly sales</label>
 <div class="flex items-baseline gap-1 bg-white border border-outline-variant px-4 py-3">
 <span class="text-secondary">$</span>
-<input type="text" id="est-sales" value="20,000" inputmode="numeric" class="w-full text-lg font-display font-bold text-primary bg-transparent focus:outline-none">
+<input type="text" id="est-sales" value="30,000" inputmode="numeric" class="w-full text-lg font-display font-bold text-primary bg-transparent focus:outline-none">
 </div>
 </div>
 <div>
 <label class="font-label text-xs uppercase tracking-widest text-outline block mb-2" for="est-rate">Blended card rate</label>
 <div class="flex items-baseline gap-1 bg-white border border-outline-variant px-4 py-3">
-<input type="text" id="est-rate" value="1.5" inputmode="decimal" class="w-full text-lg font-display font-bold text-primary bg-transparent focus:outline-none text-right">
+<input type="text" id="est-rate" value="2" inputmode="decimal" class="w-full text-lg font-display font-bold text-primary bg-transparent focus:outline-none text-right">
 <span class="text-secondary">%</span>
 </div>
 <p class="text-xs text-secondary mt-1">Typically 0.7&ndash;2.5% in NZ</p>
@@ -247,6 +247,59 @@ Join the waitlist
 <p class="mt-8 text-outline text-sm">No terminal. No contracts. From $19/month.</p>
 </div>
 </section>
+<script>
+(function () {
+  var elSales = document.getElementById('est-sales');
+  var elRate = document.getElementById('est-rate');
+  var elPct = document.getElementById('est-pct');
+  var elPctVal = document.getElementById('est-pct-val');
+  var elNet = document.getElementById('est-net');
+  var elBreakeven = document.getElementById('est-breakeven');
+  var elBreakevenLine = document.getElementById('est-breakeven-line');
+  if (!elSales) return;
+
+  function parseMoney(str) {
+    return parseFloat(str.replace(/[^0-9.]/g, '')) || 0;
+  }
+
+  function fmt(n) {
+    return '$' + Math.round(Math.abs(n)).toLocaleString();
+  }
+
+  function formatInput(el) {
+    var n = parseMoney(el.value);
+    if (n > 0) el.value = n.toLocaleString();
+  }
+
+  function update() {
+    var sales = parseMoney(elSales.value);
+    var rate = (parseFloat(elRate.value) || 2) / 100;
+    var pct = parseInt(elPct.value) / 100;
+
+    elPctVal.textContent = Math.round(pct * 100) + '%';
+
+    var feeSavings = sales * pct * rate;
+    var net = feeSavings - 19;
+    var breakeven = (sales * rate > 0) ? Math.ceil((19 / (sales * rate)) * 100) : 100;
+
+    elNet.textContent = fmt(Math.max(net, 0));
+
+    if (breakeven <= 100) {
+      elBreakevenLine.textContent = 'tapara pays for itself at just ' + breakeven + '% of sales through the app.';
+      elBreakeven.style.display = '';
+    } else {
+      elBreakeven.style.display = 'none';
+    }
+  }
+
+  elSales.addEventListener('input', update);
+  elRate.addEventListener('input', update);
+  elPct.addEventListener('input', update);
+  elSales.addEventListener('blur', function () { formatInput(elSales); });
+
+  update();
+})();
+</script>
 </main>
 <!-- Footer -->
 <footer class="bg-surface-container-low border-t border-outline-variant w-full py-12">
@@ -301,59 +354,6 @@ Your local, remembered. A commerce network for New Zealand businesses and their 
 <span class="font-sans text-[8px] font-medium uppercase tracking-wide">Contact</span>
 </a>
 </div>
-<script>
-(function () {
-  var elSales = document.getElementById('est-sales');
-  var elRate = document.getElementById('est-rate');
-  var elPct = document.getElementById('est-pct');
-  var elPctVal = document.getElementById('est-pct-val');
-  var elNet = document.getElementById('est-net');
-  var elBreakeven = document.getElementById('est-breakeven');
-  var elBreakevenLine = document.getElementById('est-breakeven-line');
-  if (!elSales) return;
-
-  function parseMoney(str) {
-    return parseFloat(str.replace(/[^0-9.]/g, '')) || 0;
-  }
-
-  function fmt(n) {
-    return '$' + Math.round(Math.abs(n)).toLocaleString();
-  }
-
-  function formatInput(el) {
-    var n = parseMoney(el.value);
-    if (n > 0) el.value = n.toLocaleString();
-  }
-
-  function update() {
-    var sales = parseMoney(elSales.value);
-    var rate = (parseFloat(elRate.value) || 1.5) / 100;
-    var pct = parseInt(elPct.value) / 100;
-
-    elPctVal.textContent = Math.round(pct * 100) + '%';
-
-    var feeSavings = sales * pct * rate;
-    var net = feeSavings - 19;
-    var breakeven = (sales * rate > 0) ? Math.ceil((19 / (sales * rate)) * 100) : 100;
-
-    elNet.textContent = fmt(Math.max(net, 0));
-
-    if (breakeven <= 100) {
-      elBreakevenLine.textContent = 'tapara pays for itself at just ' + breakeven + '% of sales through the app.';
-      elBreakeven.style.display = '';
-    } else {
-      elBreakeven.style.display = 'none';
-    }
-  }
-
-  elSales.addEventListener('input', update);
-  elRate.addEventListener('input', update);
-  elPct.addEventListener('input', update);
-  elSales.addEventListener('blur', function () { formatInput(elSales); });
-
-  update();
-})();
-</script>
 <script src="assets/js/router.js"></script>
 </body>
 </html>
