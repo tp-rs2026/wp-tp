@@ -16,6 +16,7 @@
 
   function observeSections(root) {
     root.querySelectorAll('section').forEach(function (sec) {
+      if (sec.classList.contains('no-reveal')) return;
       sec.classList.add('reveal');
       observer.observe(sec);
     });
@@ -28,7 +29,10 @@
   var ROUTE_MAP = {
     '/': '/', '/consumers': '/consumers', '/businesses': '/businesses',
     '/merchants': '/businesses',
-    '/about': '/about', '/contact': '/contact'
+    '/about': '/about', '/contact': '/contact',
+    '/terms': '/terms', '/privacy': '/privacy',
+    '/merchant-agreement': '/merchant-agreement',
+    '/complaints': '/complaints', '/stripe-return': '/stripe-return'
   };
 
   function pageFromUrl(url) {
@@ -72,6 +76,15 @@
       iframe.style.opacity = '0';
       var src = iframe.getAttribute('src');
       if (src) iframe.src = src;
+    });
+  }
+
+  /* ── Re-run inline scripts after SPA swap ── */
+  function runPageScripts(root) {
+    root.querySelectorAll('script').forEach(function (old) {
+      var s = document.createElement('script');
+      s.textContent = old.textContent;
+      old.replaceWith(s);
     });
   }
 
@@ -125,6 +138,7 @@
         if (nd && od) od.setAttribute('content', nd.getAttribute('content'));
 
         updateNav(page);
+        runPageScripts(newMain);
         if (pushState) history.pushState({ page: page }, '', displayUrl);
         window.scrollTo(0, 0);
       }, 150);
