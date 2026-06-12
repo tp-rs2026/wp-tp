@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>tapara | How Tapara Uses Open Banking</title>
+<meta name="description" content="How tapara uses Open Banking via Akahu to process zero-fee bank payments. Learn about scope of access, data handling, payment limits, and your control."/>
+<meta property="og:title" content="tapara | How Tapara Uses Open Banking"/>
+<meta property="og:description" content="How tapara uses Open Banking via Akahu to process zero-fee bank payments. Learn about scope of access, data handling, payment limits, and your control."/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://tapara.co.nz/open-banking"/>
+<meta property="og:image" content="https://tapara.co.nz/assets/images/og-image.jpg"/>
+<link href="assets/css/styles.css" rel="stylesheet"/>
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon_io/apple-touch-icon.png"/>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon_io/favicon-32x32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon_io/favicon-16x16.png"/>
+<link rel="manifest" href="assets/favicon_io/site.webmanifest"/>
+<link rel="icon" type="image/x-icon" href="assets/favicon_io/favicon.ico"/>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased overflow-x-hidden">
+<!-- Navigation -->
+<nav class="bg-white border-b border-neutral-200 sticky top-0 z-50">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto">
+<a href="/" class="flex items-center font-serif text-2xl font-bold text-neutral-900"><img src="assets/images/tapara - logo.svg" alt="tapara logo" class="h-[55px] w-[55px]">tapara</a>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-serif text-lg tracking-tight text-neutral-500 hover:text-neutral-800 transition-colors" href="/">Home</a>
+<a class="font-serif text-lg tracking-tight text-neutral-500 hover:text-neutral-800 transition-colors" href="/consumers">Consumers</a>
+<a class="font-serif text-lg tracking-tight text-neutral-500 hover:text-neutral-800 transition-colors" href="/businesses">Businesses</a>
+<a class="font-serif text-lg tracking-tight text-neutral-500 hover:text-neutral-800 transition-colors" href="/about">About</a>
+<a class="font-serif text-lg tracking-tight text-neutral-500 hover:text-neutral-800 transition-colors" href="/contact">Contact</a>
+</div>
+<a href="/contact" class="bg-primary text-on-primary px-6 py-2 rounded-full font-sans text-sm font-medium hover:opacity-80 transition-opacity">
+Join the waitlist
+</a>
+</div>
+</nav>
+<main class="min-h-screen">
+<!-- Hero -->
+<section class="relative pt-48 pb-32 px-8 overflow-hidden bg-white">
+<div class="fern-overlay absolute inset-0 pointer-events-none"></div>
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-24 relative z-10">
+<div class="md:col-span-7">
+<h1 class="font-headline text-5xl md:text-7xl leading-tight tracking-tight text-primary mb-8">
+How Tapara Uses Open Banking
+</h1>
+<p class="text-xl md:text-2xl text-secondary leading-relaxed max-w-xl">
+When you pay through tapara using your bank account, the payment is processed via Open Banking &mdash; a secure, industry-standard way to make one-off payments directly from your bank.
+</p>
+</div>
+<div class="md:col-span-5 flex flex-col justify-center space-y-6">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary text-2xl mt-0.5">lock</span>
+<div>
+<p class="font-bold text-primary">No credentials stored</p>
+<p class="text-sm text-secondary">We never see your bank login</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary text-2xl mt-0.5">schedule</span>
+<div>
+<p class="font-bold text-primary">One-off payments only</p>
+<p class="text-sm text-secondary">No recurring access to your account</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary text-2xl mt-0.5">visibility_off</span>
+<div>
+<p class="font-bold text-primary">Minimal data</p>
+<p class="text-sm text-secondary">We receive payment status and a reference ID &mdash; nothing else</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Benefits -->
+<section class="py-24 px-8 bg-surface-container-low">
+<div class="max-w-5xl mx-auto">
+<h2 class="text-4xl font-display font-bold text-primary mb-12 text-center">How in-app payments benefit you</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="bg-white p-10 border-t-4 border-primary shadow-[0_12px_40px_rgba(10,10,10,0.04)]">
+<span class="material-symbols-outlined text-primary mb-6">savings</span>
+<h3 class="text-2xl font-display font-bold text-primary mb-4">Zero fees for the merchant</h3>
+<p class="text-lg text-on-surface-variant leading-relaxed">Open Banking payments carry no interchange, no scheme fees, and no acquirer margin. That means no surcharges passed on to you, and more of your money going to the businesses you support.</p>
+</div>
+<div class="bg-white p-10 border-t-4 border-primary shadow-[0_12px_40px_rgba(10,10,10,0.04)]">
+<span class="material-symbols-outlined text-primary mb-6">account_balance</span>
+<h3 class="text-2xl font-display font-bold text-primary mb-4">Direct bank-to-bank</h3>
+<p class="text-lg text-on-surface-variant leading-relaxed">The payment goes directly from your bank account to the merchant&rsquo;s bank account. No intermediary holding your funds, no card network in the middle. Simple, direct, and fast.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Scope of Access -->
+<section class="py-24 px-8 bg-white">
+<div class="max-w-5xl mx-auto">
+<div class="text-center mb-12">
+<h2 class="text-4xl font-display font-bold text-primary mb-4">Scope of access</h2>
+<p class="text-xl text-on-surface-variant max-w-2xl mx-auto">tapara uses Open Banking only to initiate one-off payments that you explicitly approve. Nothing more.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="bg-surface-container-low p-10 border-t-4 border-primary">
+<div class="flex items-center gap-4 mb-4">
+<span class="material-symbols-outlined text-primary text-2xl">touch_app</span>
+<p class="font-label text-xs uppercase tracking-widest text-outline">Payments</p>
+</div>
+<h3 class="text-xl font-display font-bold text-primary mb-3">One-off only</h3>
+<p class="text-on-surface-variant leading-relaxed">Each payment is a single, standalone transfer. Tapara cannot set up recurring payments, direct debits, or standing orders on your account.</p>
+</div>
+<div class="bg-surface-container-low p-10 border-t-4 border-primary">
+<div class="flex items-center gap-4 mb-4">
+<span class="material-symbols-outlined text-primary text-2xl">block</span>
+<p class="font-label text-xs uppercase tracking-widest text-outline">Account access</p>
+</div>
+<h3 class="text-xl font-display font-bold text-primary mb-3">None</h3>
+<p class="text-on-surface-variant leading-relaxed">Tapara does not have access to your bank account balance, transaction history, or any other account information. We can only initiate a payment when you approve it.</p>
+</div>
+<div class="bg-surface-container-low p-10 border-t-4 border-primary">
+<div class="flex items-center gap-4 mb-4">
+<span class="material-symbols-outlined text-primary text-2xl">key_off</span>
+<p class="font-label text-xs uppercase tracking-widest text-outline">Credentials</p>
+</div>
+<h3 class="text-xl font-display font-bold text-primary mb-3">Never stored</h3>
+<p class="text-on-surface-variant leading-relaxed">Tapara never sees, collects, or stores your bank login credentials. Authentication happens directly with your bank via Akahu&rsquo;s secure Open Banking connection.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- What Tapara Receives -->
+<section class="py-24 px-8 bg-surface-container-low">
+<div class="max-w-5xl mx-auto">
+<div class="text-center mb-12">
+<h2 class="text-4xl font-display font-bold text-primary mb-4">What Tapara receives</h2>
+<p class="text-xl text-on-surface-variant max-w-2xl mx-auto">When a payment is processed, Tapara receives only the minimum information needed to confirm the transaction.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+<div class="bg-white p-10 border-t-4 border-primary shadow-[0_12px_40px_rgba(10,10,10,0.04)]">
+<span class="material-symbols-outlined text-primary mb-6">check_circle</span>
+<h3 class="text-xl font-display font-bold text-primary mb-3">Payment status</h3>
+<p class="text-on-surface-variant leading-relaxed">Whether the payment was successful, pending, or failed. This lets us show you and the merchant a confirmation.</p>
+</div>
+<div class="bg-white p-10 border-t-4 border-primary shadow-[0_12px_40px_rgba(10,10,10,0.04)]">
+<span class="material-symbols-outlined text-primary mb-6">tag</span>
+<h3 class="text-xl font-display font-bold text-primary mb-3">Reference ID</h3>
+<p class="text-on-surface-variant leading-relaxed">A unique transaction identifier used to match the payment to your order. This is not your bank account number.</p>
+</div>
+</div>
+<p class="text-center text-secondary mt-8 max-w-xl mx-auto">Tapara does not receive your account number, bank balance, transaction history, or any other banking information.</p>
+</div>
+</section>
+
+<!-- Payment Limits -->
+<section class="py-24 px-8 bg-white">
+<div class="max-w-5xl mx-auto">
+<div class="text-center mb-12">
+<h2 class="text-4xl font-display font-bold text-primary mb-4">Payment limits</h2>
+<p class="text-xl text-on-surface-variant max-w-2xl mx-auto">To protect both consumers and merchants, Open Banking payments through tapara have the following limits.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="bg-surface-container-low p-10 border-t-4 border-primary">
+<div class="flex items-center gap-4 mb-4">
+<span class="material-symbols-outlined text-primary text-2xl">receipt_long</span>
+<p class="font-label text-xs uppercase tracking-widest text-outline">Per transaction</p>
+</div>
+<p class="text-5xl font-display font-bold text-primary">$5,000</p>
+</div>
+<div class="bg-surface-container-low p-10 border-t-4 border-primary">
+<div class="flex items-center gap-4 mb-4">
+<span class="material-symbols-outlined text-primary text-2xl">today</span>
+<p class="font-label text-xs uppercase tracking-widest text-outline">Daily limit</p>
+</div>
+<p class="text-5xl font-display font-bold text-primary">$10,000</p>
+</div>
+<div class="bg-surface-container-low p-10 border-t-4 border-primary">
+<div class="flex items-center gap-4 mb-4">
+<span class="material-symbols-outlined text-primary text-2xl">payments</span>
+<p class="font-label text-xs uppercase tracking-widest text-outline">Minimum</p>
+</div>
+<p class="text-5xl font-display font-bold text-primary">$0.50</p>
+</div>
+</div>
+<p class="text-center text-secondary mt-8 text-sm">These limits are in addition to any limits set by your bank. If a payment exceeds these limits, you can pay using a card instead.</p>
+</div>
+</section>
+
+<!-- You're in Control -->
+<section class="py-24 px-8 bg-surface-container-low">
+<div class="max-w-5xl mx-auto">
+<div class="text-center mb-12">
+<h2 class="text-4xl font-display font-bold text-primary mb-4">You&rsquo;re in control</h2>
+<p class="text-xl text-on-surface-variant max-w-2xl mx-auto">Because tapara uses one-off payments with no ongoing connection to your bank, there&rsquo;s nothing to cancel.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="bg-white p-10 border-t-4 border-primary shadow-[0_12px_40px_rgba(10,10,10,0.04)]">
+<span class="material-symbols-outlined text-primary mb-6">swap_horiz</span>
+<h3 class="text-xl font-display font-bold text-primary mb-3">Switch banks</h3>
+<p class="text-on-surface-variant leading-relaxed">Change which bank account you pay from at any time in the tapara app.</p>
+</div>
+<div class="bg-white p-10 border-t-4 border-primary shadow-[0_12px_40px_rgba(10,10,10,0.04)]">
+<span class="material-symbols-outlined text-primary mb-6">credit_card</span>
+<h3 class="text-xl font-display font-bold text-primary mb-3">Pay by card instead</h3>
+<p class="text-on-surface-variant leading-relaxed">Choose to pay by card for any transaction. Open Banking is always optional.</p>
+</div>
+<div class="bg-white p-10 border-t-4 border-primary shadow-[0_12px_40px_rgba(10,10,10,0.04)]">
+<span class="material-symbols-outlined text-primary mb-6">delete</span>
+<h3 class="text-xl font-display font-bold text-primary mb-3">Delete your account</h3>
+<p class="text-on-surface-variant leading-relaxed">Your bank connection is removed immediately. There is no ongoing link to your bank after deletion.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Powered by Akahu -->
+<section class="py-24 px-8 bg-white">
+<div class="max-w-4xl mx-auto">
+<div class="bg-surface-container-low p-10 md:p-16 shadow-[0_12px_40px_rgba(10,10,10,0.04)]">
+<div class="flex items-center gap-4 mb-8 pb-8 border-b border-outline-variant/50">
+<img src="assets/images/akahu-logo.svg" alt="Akahu logo" class="h-10 w-auto">
+<span class="text-2xl font-display font-bold text-primary">Akahu</span>
+</div>
+<div class="space-y-4">
+<p class="text-lg text-on-surface-variant leading-relaxed">
+Tapara does not connect to your bank directly. All Open Banking payments are processed through <strong class="text-primary">Akahu</strong>, which provides open finance infrastructure for New Zealand.
+</p>
+<p class="text-on-surface-variant leading-relaxed">
+Akahu is an accredited intermediary that provides secure connections to New Zealand banks. They handle the authentication and payment initiation on tapara&rsquo;s behalf, using bank-grade encryption and security standards.
+</p>
+<p class="text-on-surface-variant leading-relaxed">
+When you make a bank payment in tapara, you&rsquo;ll be redirected to your bank&rsquo;s secure login to approve the payment. Tapara never sees your bank credentials &mdash; that process is handled entirely by Akahu and your bank.
+</p>
+<a href="https://www.akahu.nz" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-primary font-medium hover:opacity-70 transition-opacity mt-2">
+Learn more about Akahu
+<span class="material-symbols-outlined text-lg">open_in_new</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Privacy and Data -->
+<section class="py-24 px-8 bg-surface-container-low">
+<div class="max-w-5xl mx-auto">
+<div class="text-center mb-12">
+<h2 class="text-4xl font-display font-bold text-primary mb-4">Privacy and data</h2>
+<p class="text-xl text-on-surface-variant max-w-2xl mx-auto">Here&rsquo;s how we handle data related to Open Banking payments.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="bg-white p-10 border-t-4 border-primary shadow-[0_12px_40px_rgba(10,10,10,0.04)]">
+<div class="flex items-center gap-4 mb-4">
+<span class="material-symbols-outlined text-primary text-2xl">database</span>
+<p class="font-label text-xs uppercase tracking-widest text-outline">Data collected</p>
+</div>
+<p class="text-on-surface-variant leading-relaxed">Payment status and reference ID only. No bank account details, balances, or transaction history.</p>
+</div>
+<div class="bg-white p-10 border-t-4 border-primary shadow-[0_12px_40px_rgba(10,10,10,0.04)]">
+<div class="flex items-center gap-4 mb-4">
+<span class="material-symbols-outlined text-primary text-2xl">event_note</span>
+<p class="font-label text-xs uppercase tracking-widest text-outline">Retention</p>
+</div>
+<p class="text-on-surface-variant leading-relaxed">Transaction records are retained for 7 years as required under the Anti-Money Laundering and Countering Financing of Terrorism Act 2009 (AML/CFT).</p>
+</div>
+<div class="bg-white p-10 border-t-4 border-primary shadow-[0_12px_40px_rgba(10,10,10,0.04)]">
+<div class="flex items-center gap-4 mb-4">
+<span class="material-symbols-outlined text-primary text-2xl">share</span>
+<p class="font-label text-xs uppercase tracking-widest text-outline">Third parties</p>
+</div>
+<p class="text-on-surface-variant leading-relaxed">Payment data is shared with Akahu (to process the payment) and the merchant (to confirm the order). No data is sold to third parties.</p>
+</div>
+</div>
+<p class="text-center text-secondary mt-8">For full details, see our <a href="https://tapara.co.nz/privacy" class="text-primary font-medium underline hover:opacity-70 transition-opacity">Privacy Policy</a>.</p>
+</div>
+</section>
+
+<!-- CTA -->
+<section class="py-32 px-8 bg-white text-center border-t border-outline-variant">
+<div class="max-w-3xl mx-auto">
+<h2 class="text-5xl font-display font-bold mb-10">Questions?</h2>
+<a href="/contact" class="inline-block bg-primary text-white px-12 py-5 rounded-full font-label text-sm uppercase tracking-[0.2em] hover:opacity-90 transition-all shadow-xl shadow-stone-200">
+Contact us
+</a>
+<p class="mt-8 text-outline text-sm">If you have any questions about how tapara handles payments or your data, get in touch.</p>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low border-t border-outline-variant w-full py-12">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 px-8 max-w-7xl mx-auto">
+<div>
+<div class="font-serif text-xl font-bold text-neutral-900 mb-4">tapara</div>
+<p class="font-sans text-sm text-neutral-600 max-w-xs">
+Your local, remembered. A commerce network for New Zealand businesses and their regulars.
+</p>
+</div>
+<div class="flex flex-col gap-2">
+<span class="font-sans text-xs font-medium uppercase tracking-widest text-outline mb-1">Navigate</span>
+<a class="font-sans text-sm text-neutral-600 hover:text-neutral-900 underline decoration-transparent hover:decoration-current transition-all" href="/">Home</a>
+<a class="font-sans text-sm text-neutral-600 hover:text-neutral-900 underline decoration-transparent hover:decoration-current transition-all" href="/consumers">Consumers</a>
+<a class="font-sans text-sm text-neutral-600 hover:text-neutral-900 underline decoration-transparent hover:decoration-current transition-all" href="/businesses">Businesses</a>
+<a class="font-sans text-sm text-neutral-600 hover:text-neutral-900 underline decoration-transparent hover:decoration-current transition-all" href="/about">About</a>
+<a class="font-sans text-sm text-neutral-600 hover:text-neutral-900 underline decoration-transparent hover:decoration-current transition-all" href="/contact">Contact</a>
+</div>
+<div class="flex flex-col gap-2">
+<span class="font-sans text-xs font-medium uppercase tracking-widest text-outline mb-1">Legal</span>
+<a class="font-sans text-sm text-neutral-600 hover:text-neutral-900 underline decoration-transparent hover:decoration-current transition-all" href="/terms">Terms of Service</a>
+<a class="font-sans text-sm text-neutral-600 hover:text-neutral-900 underline decoration-transparent hover:decoration-current transition-all" href="/privacy">Privacy Policy</a>
+<a class="font-sans text-sm text-neutral-600 hover:text-neutral-900 underline decoration-transparent hover:decoration-current transition-all" href="/merchant-agreement">Merchant Agreement</a>
+<a class="font-sans text-sm text-neutral-600 hover:text-neutral-900 underline decoration-transparent hover:decoration-current transition-all" href="/complaints">Complaints</a>
+<a class="font-sans text-sm text-neutral-600 hover:text-neutral-900 underline decoration-transparent hover:decoration-current transition-all" href="/open-banking">Open Banking</a>
+</div>
+<div class="font-sans text-sm text-neutral-600">
+<p>&copy; 2026 tapara. All rights reserved.</p>
+<p class="mt-4 text-xs text-outline leading-relaxed">Tapara Limited is registered on the Financial Service Providers Register (FSP1012381) and is a member of the Financial Dispute Resolution Service.</p>
+</div>
+</div>
+</footer>
+<!-- Mobile Bottom Nav -->
+<div class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-6 pb-6 pt-3 bg-white/80 backdrop-blur-xl border-t border-neutral-100 shadow-[0_-12px_40px_rgba(10,10,10,0.04)] rounded-t-3xl">
+<a href="/" class="flex flex-col items-center justify-center text-neutral-400 hover:text-neutral-900">
+<span class="material-symbols-outlined text-[20px]">home</span>
+<span class="font-sans text-[8px] font-medium uppercase tracking-wide">Home</span>
+</a>
+<a href="/consumers" class="flex flex-col items-center justify-center text-neutral-400 hover:text-neutral-900">
+<span class="material-symbols-outlined text-[20px]">person</span>
+<span class="font-sans text-[8px] font-medium uppercase tracking-wide">Consumers</span>
+</a>
+<a href="/businesses" class="flex flex-col items-center justify-center text-neutral-400 hover:text-neutral-900">
+<span class="material-symbols-outlined text-[20px]">storefront</span>
+<span class="font-sans text-[8px] font-medium uppercase tracking-wide">Businesses</span>
+</a>
+<a href="/about" class="flex flex-col items-center justify-center text-neutral-400 hover:text-neutral-900">
+<span class="material-symbols-outlined text-[20px]">info</span>
+<span class="font-sans text-[8px] font-medium uppercase tracking-wide">About</span>
+</a>
+<a href="/contact" class="flex flex-col items-center justify-center text-neutral-400 hover:text-neutral-900">
+<span class="material-symbols-outlined text-[20px]">mail</span>
+<span class="font-sans text-[8px] font-medium uppercase tracking-wide">Contact</span>
+</a>
+</div>
+<script src="assets/js/router.js"></script>
+</body>
+</html>

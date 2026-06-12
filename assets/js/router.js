@@ -32,7 +32,8 @@
     '/about': '/about', '/contact': '/contact',
     '/terms': '/terms', '/privacy': '/privacy',
     '/merchant-agreement': '/merchant-agreement',
-    '/complaints': '/complaints', '/stripe-return': '/stripe-return'
+    '/complaints': '/complaints', '/stripe-return': '/stripe-return',
+    '/open-banking': '/open-banking'
   };
 
   function pageFromUrl(url) {
