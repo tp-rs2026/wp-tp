@@ -1,0 +1,12 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["KWDFKF453V.co.nz.tapara"],
+        "components": [
+          { "/": "/payment-return*" }
+        ]
+      }
+    ]
+  }
+}
