@@ -3,12 +3,12 @@
     "apps": [],
     "details": [
       {
-        "appIDs": ["KWDFKF453V.co.tapara"],
+        "appIDs": ["C46V87RPTL.co.tapara"],
         "paths": ["/payment-return", "/verify-return*", "/stripe-return"]
       }
     ]
   },
   "webcredentials": {
-    "apps": ["KWDFKF453V.co.tapara"]
+    "apps": ["C46V87RPTL.co.tapara"]
   }
 }
