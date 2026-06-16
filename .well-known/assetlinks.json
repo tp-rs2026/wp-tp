@@ -3,7 +3,7 @@
     "relation": ["delegate_permission/common.handle_all_urls"],
     "target": {
       "namespace": "android_app",
-      "package_name": "co.nz.tapara",
+      "package_name": "co.tapara",
       "sha256_cert_fingerprints": ["38:48:75:CD:6C:9C:E2:AF:C8:36:E8:F3:C3:6E:32:AA:91:54:BA:ED:2D:D7:65:AC:45:11:45:1F:7F:9F:7B:4B"]
     }
   }
