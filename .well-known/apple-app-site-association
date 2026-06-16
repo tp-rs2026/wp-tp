@@ -3,9 +3,12 @@
     "apps": [],
     "details": [
       {
-        "appID": "KWDFKF453V.co.nz.tapara",
-        "paths": ["/payment-return", "/verify-return", "/stripe-return"]
+        "appIDs": ["KWDFKF453V.co.nz.tapara"],
+        "paths": ["/payment-return", "/verify-return*", "/stripe-return"]
       }
     ]
+  },
+  "webcredentials": {
+    "apps": ["KWDFKF453V.co.nz.tapara"]
   }
 }
