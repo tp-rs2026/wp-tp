@@ -116,6 +116,11 @@ Retry
   var requestId = sessionStorage.getItem('pay-request-id');
   sessionStorage.removeItem('pay-request-id');
 
+  // Close older payment tabs when a new QR code is scanned
+  var channel = new BroadcastChannel('tapara-pay');
+  channel.postMessage('new-payment');
+  channel.onmessage = function () { window.close(); };
+
   if (!requestId) {
     showState('not-found');
     return;
