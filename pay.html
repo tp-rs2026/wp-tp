@@ -190,7 +190,6 @@ Retry
     document.getElementById('order-total').textContent = formatCurrency(data.total);
 
     var btn = document.getElementById('pay-button');
-    btn.textContent = 'Pay ' + formatCurrency(data.total);
     btn.onclick = function () { initiatePayment(); };
 
     showState('pending');
@@ -282,7 +281,7 @@ Retry
     var btn = document.getElementById('pay-button');
     btn.disabled = false;
     btn.classList.remove('opacity-60', 'cursor-not-allowed');
-    btn.textContent = 'Pay ' + document.getElementById('order-total').textContent;
+    btn.textContent = 'Pay';
   }
 
   fetchOrder();
