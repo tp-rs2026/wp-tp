@@ -146,8 +146,8 @@ tapara gives your business a customer base with built-in loyalty, customer recog
 <section class="py-32 px-8 bg-white" id="savings">
 <div class="max-w-4xl mx-auto">
 <div class="text-center mb-16">
-<h2 class="text-4xl font-display font-bold text-primary mb-6">And it pays for itself.</h2>
-<p class="text-xl text-on-surface-variant max-w-2xl mx-auto">Around 90% of payments at a typical NZ business are domestic. With tapara, these flow through Open Banking at zero processing fees. The more that flows through tapara, the more you save.</p>
+<h2 class="text-4xl font-display font-bold text-primary mb-6">You keep 80% of your fee savings.</h2>
+<p class="text-xl text-on-surface-variant max-w-2xl mx-auto">When payments flow through Tapara Pay via Open Banking or cash, there are no card processing fees. You pay tapara 20% of what you would have paid your card processor. You keep the rest. First 3 months free.</p>
 </div>
 <div class="max-w-2xl mx-auto shadow-[0_12px_40px_rgba(10,10,10,0.08)] overflow-hidden">
 <div class="bg-surface-container-low p-8 md:p-10 space-y-6">
@@ -179,9 +179,13 @@ tapara gives your business a customer base with built-in loyalty, customer recog
 </div>
 <div class="bg-white p-8 md:p-10 text-center border-t border-outline-variant">
 <p class="font-label text-xs uppercase tracking-widest text-outline mb-2">You save</p>
-<p class="text-5xl md:text-6xl font-display font-bold text-primary" id="est-net">$71</p>
-<p class="text-secondary mt-2">per month, after the $19 tapara subscription</p>
-<p class="text-sm text-secondary mt-4" id="est-breakeven"><span class="text-primary font-bold" id="est-breakeven-line"></span> Everything above that is yours to keep.</p>
+<p class="text-5xl md:text-6xl font-display font-bold text-primary" id="est-savings">$432</p>
+<p class="text-secondary mt-2">per month &mdash; 80% of your fee savings</p>
+<div class="flex justify-center gap-8 mt-6 text-sm text-secondary">
+<div><span class="text-primary font-bold" id="est-tapara-fee">$108</span> tapara fee</div>
+<div><span class="text-primary font-bold" id="est-card-fees">$540</span> card fees avoided</div>
+</div>
+<p class="text-xs text-outline mt-4">First 3 months free. No contracts. No minimum.</p>
 </div>
 </div>
 </div>
@@ -206,7 +210,8 @@ tapara gives your business a customer base with built-in loyalty, customer recog
 <li class="flex items-start gap-3"><span class="material-symbols-outlined text-outline text-lg">check</span> <span class="text-secondary">Keep your existing terminal</span></li>
 </ul>
 <div class="mt-auto pt-8 border-t border-outline-variant">
-<p class="text-3xl font-display font-bold text-primary">$19<span class="text-base font-body font-normal text-secondary">/mo</span></p>
+<p class="text-xl font-display font-bold text-primary">20% of fee savings</p>
+<p class="text-sm text-secondary mt-1">First 3 months free</p>
 </div>
 </div>
 <!-- Go all-in -->
@@ -222,7 +227,8 @@ tapara gives your business a customer base with built-in loyalty, customer recog
 <li class="flex items-start gap-3"><span class="material-symbols-outlined text-white/90 text-lg">check</span> Drop terminal lease ($30&ndash;80/mo saved)</li>
 </ul>
 <div class="mt-auto pt-8 border-t border-white/20">
-<p class="text-3xl font-display font-bold text-white">$19<span class="text-base font-body font-normal text-white/50">/mo</span></p>
+<p class="text-xl font-display font-bold text-white">20% of fee savings</p>
+<p class="text-sm text-white/50 mt-1">First 3 months free</p>
 </div>
 </div>
 </div>
@@ -244,7 +250,7 @@ The NZ government has signalled it will ban in-store payment surcharges. When it
 <a href="/contact" class="inline-block bg-primary text-white px-12 py-5 rounded-full font-label text-sm uppercase tracking-[0.2em] hover:opacity-90 transition-all shadow-xl shadow-stone-200">
 Join the waitlist
 </a>
-<p class="mt-8 text-outline text-sm">No terminal. No contracts. From $19/month.</p>
+<p class="mt-8 text-outline text-sm">No terminal. No contracts. First 3 months free.</p>
 </div>
 </section>
 <script>
@@ -253,9 +259,9 @@ Join the waitlist
   var elRate = document.getElementById('est-rate');
   var elPct = document.getElementById('est-pct');
   var elPctVal = document.getElementById('est-pct-val');
-  var elNet = document.getElementById('est-net');
-  var elBreakeven = document.getElementById('est-breakeven');
-  var elBreakevenLine = document.getElementById('est-breakeven-line');
+  var elSavings = document.getElementById('est-savings');
+  var elTaparaFee = document.getElementById('est-tapara-fee');
+  var elCardFees = document.getElementById('est-card-fees');
   if (!elSales) return;
 
   function parseMoney(str) {
@@ -278,18 +284,13 @@ Join the waitlist
 
     elPctVal.textContent = Math.round(pct * 100) + '%';
 
-    var feeSavings = sales * pct * rate;
-    var net = feeSavings - 19;
-    var breakeven = (sales * rate > 0) ? Math.ceil((19 / (sales * rate)) * 100) : 100;
+    var cardFees = sales * pct * rate;
+    var taparaFee = cardFees * 0.2;
+    var savings = cardFees * 0.8;
 
-    elNet.textContent = fmt(Math.max(net, 0));
-
-    if (breakeven <= 100) {
-      elBreakevenLine.textContent = 'tapara pays for itself at just ' + breakeven + '% of sales through the app.';
-      elBreakeven.style.display = '';
-    } else {
-      elBreakeven.style.display = 'none';
-    }
+    elSavings.textContent = fmt(savings);
+    elTaparaFee.textContent = fmt(taparaFee);
+    elCardFees.textContent = fmt(cardFees);
   }
 
   elSales.addEventListener('input', update);
