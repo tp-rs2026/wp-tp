@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>tapara | Pay</title>
+<meta name="description" content="Complete your payment with tapara."/>
+<meta name="robots" content="noindex, nofollow"/>
+<link href="assets/css/styles.css" rel="stylesheet"/>
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon_io/apple-touch-icon.png"/>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon_io/favicon-32x32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon_io/favicon-16x16.png"/>
+<link rel="manifest" href="assets/favicon_io/site.webmanifest"/>
+<link rel="icon" type="image/x-icon" href="assets/favicon_io/favicon.ico"/>
+</head>
+<body class="bg-surface text-on-surface font-body antialiased">
+
+<main class="min-h-screen flex flex-col items-center justify-center px-6 py-12">
+<div class="w-full max-w-md">
+
+<!-- State: Loading -->
+<div id="state-loading" class="text-center">
+<div class="w-10 h-10 border-2 border-outline-variant border-t-primary rounded-full animate-spin mx-auto mb-6"></div>
+<p class="text-on-surface-variant text-lg">Loading order&hellip;</p>
+</div>
+
+<!-- State: Order Summary (pending) -->
+<div id="state-pending" class="hidden">
+<p id="business-name" class="font-serif text-2xl font-bold text-center mb-8"></p>
+
+<div class="bg-white border border-outline-variant rounded-3xl p-6 mb-6">
+<div id="items-list" class="space-y-3"></div>
+<div class="border-t border-outline-variant mt-4 pt-4 flex justify-between items-center">
+<span class="font-sans font-medium text-on-surface">Total</span>
+<span id="order-total" class="font-serif text-2xl font-bold text-primary"></span>
+</div>
+</div>
+
+<button id="pay-button"
+class="w-full bg-primary text-white py-4 rounded-full font-sans font-medium text-lg hover:opacity-90 transition-opacity"
+type="button">
+Pay
+</button>
+
+<p id="pay-error" class="hidden text-center text-sm text-red-600 mt-4"></p>
+
+<p class="text-xs text-outline text-center mt-6 leading-relaxed">
+You&rsquo;ll be redirected to your bank to authorise this payment.
+</p>
+</div>
+
+<!-- State: Already Approved -->
+<div id="state-approved" class="hidden text-center">
+<div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-8">
+<span class="material-symbols-outlined text-primary text-4xl">check_circle</span>
+</div>
+<h1 class="font-serif text-3xl font-bold text-primary mb-4">Payment complete</h1>
+<p class="text-lg text-on-surface-variant leading-relaxed">
+Your payment to <strong id="approved-business"></strong> has been confirmed.
+</p>
+</div>
+
+<!-- State: Unavailable (declined/cancelled/expired/error) -->
+<div id="state-unavailable" class="hidden text-center">
+<div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-8">
+<span class="material-symbols-outlined text-primary text-4xl">error</span>
+</div>
+<h1 class="font-serif text-3xl font-bold text-primary mb-4">Payment unavailable</h1>
+<p id="unavailable-message" class="text-lg text-on-surface-variant leading-relaxed">
+This payment request is no longer available.
+</p>
+</div>
+
+<!-- State: Not Found -->
+<div id="state-not-found" class="hidden text-center">
+<div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-8">
+<span class="material-symbols-outlined text-primary text-4xl">search_off</span>
+</div>
+<h1 class="font-serif text-3xl font-bold text-primary mb-4">Not found</h1>
+<p class="text-lg text-on-surface-variant leading-relaxed">
+We couldn&rsquo;t find this payment request. The link may be incorrect.
+</p>
+</div>
+
+<!-- State: Rate Limited -->
+<div id="state-rate-limited" class="hidden text-center">
+<div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-8">
+<span class="material-symbols-outlined text-primary text-4xl">hourglass_top</span>
+</div>
+<h1 class="font-serif text-3xl font-bold text-primary mb-4">Too many requests</h1>
+<p class="text-lg text-on-surface-variant leading-relaxed">
+Please wait a moment and try again.
+</p>
+</div>
+
+<!-- State: Network Error -->
+<div id="state-error" class="hidden text-center">
+<div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-8">
+<span class="material-symbols-outlined text-primary text-4xl">wifi_off</span>
+</div>
+<h1 class="font-serif text-3xl font-bold text-primary mb-4">Something went wrong</h1>
+<p class="text-lg text-on-surface-variant leading-relaxed mb-8">
+We couldn&rsquo;t load the payment details. Check your connection and try again.
+</p>
+<button onclick="location.reload()" class="bg-primary text-white px-8 py-4 rounded-full font-sans font-medium hover:opacity-90 transition-opacity">
+Retry
+</button>
+</div>
+
+</div>
+</main>
+
+<script>
+(function () {
+  var API_BASE = 'https://api.tapara.co.nz';
+  var requestId = sessionStorage.getItem('pay-request-id');
+  sessionStorage.removeItem('pay-request-id');
+
+  if (!requestId) {
+    showState('not-found');
+    return;
+  }
+
+  function showState(name) {
+    ['loading', 'pending', 'approved', 'unavailable', 'not-found', 'rate-limited', 'error'].forEach(function (s) {
+      var el = document.getElementById('state-' + s);
+      if (el) el.classList.toggle('hidden', s !== name);
+    });
+  }
+
+  function formatCurrency(val) {
+    return '$' + Number(val).toFixed(2);
+  }
+
+  function fetchOrder() {
+    showState('loading');
+    fetch(API_BASE + '/payment-requests/' + requestId + '/guest')
+      .then(function (res) {
+        if (res.status === 404) { showState('not-found'); return null; }
+        if (res.status === 429) { showState('rate-limited'); return null; }
+        if (!res.ok) { showState('error'); return null; }
+        return res.json();
+      })
+      .then(function (data) {
+        if (!data) return;
+        if (data.status === 'pending') renderPending(data);
+        else if (data.status === 'approved') renderApproved(data);
+        else renderUnavailable(data);
+      })
+      .catch(function () {
+        showState('error');
+      });
+  }
+
+  function renderPending(data) {
+    document.getElementById('business-name').textContent = data.businessName;
+
+    var itemsList = document.getElementById('items-list');
+    itemsList.innerHTML = '';
+    (data.items || []).forEach(function (item) {
+      var row = document.createElement('div');
+      row.className = 'flex justify-between items-baseline';
+
+      var nameEl;
+      if (item.quantity && item.quantity > 1) {
+        nameEl = document.createElement('div');
+        var nameSpan = document.createElement('span');
+        nameSpan.className = 'text-on-surface-variant';
+        nameSpan.textContent = item.name;
+        var qtySpan = document.createElement('span');
+        qtySpan.className = 'text-outline text-sm ml-1';
+        qtySpan.textContent = '\u00D7 ' + item.quantity;
+        nameEl.appendChild(nameSpan);
+        nameEl.appendChild(qtySpan);
+      } else {
+        nameEl = document.createElement('span');
+        nameEl.className = 'text-on-surface-variant';
+        nameEl.textContent = item.name;
+      }
+
+      var priceEl = document.createElement('span');
+      priceEl.className = 'text-on-surface font-medium';
+      priceEl.textContent = formatCurrency(item.price);
+
+      row.appendChild(nameEl);
+      row.appendChild(priceEl);
+      itemsList.appendChild(row);
+    });
+
+    document.getElementById('order-total').textContent = formatCurrency(data.total);
+
+    var btn = document.getElementById('pay-button');
+    btn.textContent = 'Pay ' + formatCurrency(data.total);
+    btn.onclick = function () { initiatePayment(); };
+
+    showState('pending');
+  }
+
+  function renderApproved(data) {
+    document.getElementById('approved-business').textContent = data.businessName;
+    showState('approved');
+  }
+
+  function renderUnavailable(data) {
+    var msg = document.getElementById('unavailable-message');
+    if (data.status === 'expired') msg.textContent = 'This payment request has expired.';
+    else if (data.status === 'cancelled') msg.textContent = 'This payment was cancelled.';
+    else if (data.status === 'declined') msg.textContent = 'This payment was declined.';
+    else msg.textContent = 'This payment request is no longer available.';
+    showState('unavailable');
+  }
+
+  function initiatePayment() {
+    var btn = document.getElementById('pay-button');
+    var errEl = document.getElementById('pay-error');
+    btn.disabled = true;
+    btn.textContent = 'Connecting to bank\u2026';
+    btn.classList.add('opacity-60', 'cursor-not-allowed');
+    errEl.classList.add('hidden');
+
+    fetch(API_BASE + '/payment-requests/' + requestId + '/approve-guest', {
+      method: 'POST'
+    })
+      .then(function (res) {
+        if (res.ok) return res.json();
+        return res.json().then(function (body) {
+          var err = new Error(body.error || 'unknown');
+          err.status = res.status;
+          err.code = body.error;
+          throw err;
+        });
+      })
+      .then(function (data) {
+        if (data.authorisationUrl) {
+          window.location.href = data.authorisationUrl;
+        }
+      })
+      .catch(function (err) {
+        if (!err || !err.status) {
+          showPayError('Something went wrong. Please try again.');
+          return;
+        }
+
+        if (err.status === 409 && err.code === 'already_resolved') {
+          fetchOrder();
+          return;
+        }
+
+        if (err.status === 429) {
+          showPayError('Too many requests. Please wait a moment and try again.');
+          return;
+        }
+
+        if (err.status === 422) {
+          if (err.code === 'no_payout_account' || err.code === 'payout_account_not_active') {
+            showPayError('This business can\u2019t accept bank payments right now.');
+          } else if (err.code === 'invalid_amount' || err.code === 'amount_exceeds_limit') {
+            showPayError('The payment amount is invalid.');
+          } else {
+            showPayError('Something went wrong. Please try again.');
+          }
+          return;
+        }
+
+        if (err.status === 502 && err.code === 'payment_initiation_failed') {
+          showPayError('Could not connect to the bank. Please try again.');
+          return;
+        }
+
+        showPayError('Something went wrong. Please try again.');
+      });
+  }
+
+  function showPayError(message) {
+    var errEl = document.getElementById('pay-error');
+    errEl.textContent = message;
+    errEl.classList.remove('hidden');
+    resetPayButton();
+  }
+
+  function resetPayButton() {
+    var btn = document.getElementById('pay-button');
+    btn.disabled = false;
+    btn.classList.remove('opacity-60', 'cursor-not-allowed');
+    btn.textContent = 'Pay ' + document.getElementById('order-total').textContent;
+  }
+
+  fetchOrder();
+})();
+</script>
+</body>
+</html>
