@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>tapara | Payment</title>
+<meta name="description" content="Your tapara payment status."/>
+<meta name="robots" content="noindex, nofollow"/>
+<link href="assets/css/styles.css" rel="stylesheet"/>
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon_io/apple-touch-icon.png"/>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon_io/favicon-32x32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon_io/favicon-16x16.png"/>
+<link rel="manifest" href="assets/favicon_io/site.webmanifest"/>
+<link rel="icon" type="image/x-icon" href="assets/favicon_io/favicon.ico"/>
+</head>
+<body class="bg-surface text-on-surface font-body antialiased">
+
+<main class="min-h-screen flex flex-col items-center justify-center px-6 py-12">
+<div class="w-full max-w-md">
+
+<!-- State: Polling -->
+<div id="state-polling" class="text-center">
+<div class="w-10 h-10 border-2 border-outline-variant border-t-primary rounded-full animate-spin mx-auto mb-6"></div>
+<h1 class="font-serif text-3xl font-bold text-primary mb-4">Processing payment</h1>
+<p class="text-lg text-on-surface-variant leading-relaxed">Confirming with your bank&hellip;</p>
+</div>
+
+<!-- State: Success -->
+<div id="state-success" class="hidden text-center">
+<div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-8">
+<span class="material-symbols-outlined text-primary text-4xl">check_circle</span>
+</div>
+<h1 class="font-serif text-3xl font-bold text-primary mb-4">Payment successful</h1>
+<p class="text-lg text-on-surface-variant leading-relaxed mb-2">
+Your payment of <strong id="success-total"></strong> to <strong id="success-business"></strong> is confirmed.
+</p>
+<p class="text-sm text-outline mt-6">You can close this tab.</p>
+<div class="mt-10 pt-8 border-t border-outline-variant">
+<p class="text-sm text-on-surface-variant mb-6">
+Download tapara to track your purchases and earn loyalty rewards.
+</p>
+<div class="flex flex-col gap-3">
+<a href="https://apps.apple.com" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary text-white rounded-full font-medium hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-xl">apple</span>
+App Store
+</a>
+<a href="https://play.google.com" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white border border-outline-variant text-primary rounded-full font-medium hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-xl">shop</span>
+Google Play
+</a>
+</div>
+</div>
+</div>
+
+<!-- State: Failed -->
+<div id="state-failed" class="hidden text-center">
+<div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-8">
+<span class="material-symbols-outlined text-primary text-4xl">error</span>
+</div>
+<h1 class="font-serif text-3xl font-bold text-primary mb-4">Payment not completed</h1>
+<p id="failed-message" class="text-lg text-on-surface-variant leading-relaxed mb-8">
+Your payment could not be completed.
+</p>
+<a id="retry-link" href="/" class="inline-block bg-primary text-white px-8 py-4 rounded-full font-sans font-medium hover:opacity-90 transition-opacity">
+Try again
+</a>
+</div>
+
+<!-- State: Timeout -->
+<div id="state-timeout" class="hidden text-center">
+<div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-8">
+<span class="material-symbols-outlined text-primary text-4xl">schedule</span>
+</div>
+<h1 class="font-serif text-3xl font-bold text-primary mb-4">Payment being processed</h1>
+<p class="text-lg text-on-surface-variant leading-relaxed">
+Your payment is still being processed. You&rsquo;ll see the result in your bank app shortly.
+</p>
+</div>
+
+<!-- State: No ID -->
+<div id="state-no-id" class="hidden text-center">
+<div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-8">
+<span class="material-symbols-outlined text-primary text-4xl">search_off</span>
+</div>
+<h1 class="font-serif text-3xl font-bold text-primary mb-4">No payment found</h1>
+<p class="text-lg text-on-surface-variant leading-relaxed">
+We couldn&rsquo;t find a payment to check. The link may be invalid.
+</p>
+</div>
+
+</div>
+</main>
+
+<script>
+(function () {
+  var API_BASE = 'https://api.tapara.co.nz';
+  var POLL_INTERVAL = 3000;
+  var MAX_POLLS = 10;
+  var pollCount = 0;
+  var pollTimer = null;
+
+  var params = new URLSearchParams(window.location.search);
+  var requestId = params.get('pr');
+
+  if (!requestId) {
+    showState('no-id');
+    return;
+  }
+
+  var retryLink = document.getElementById('retry-link');
+  if (retryLink) retryLink.href = '/pay/' + requestId;
+
+  function showState(name) {
+    ['polling', 'success', 'failed', 'timeout', 'no-id'].forEach(function (s) {
+      var el = document.getElementById('state-' + s);
+      if (el) el.classList.toggle('hidden', s !== name);
+    });
+  }
+
+  function formatCurrency(val) {
+    return '$' + Number(val).toFixed(2);
+  }
+
+  function pollStatus() {
+    fetch(API_BASE + '/payment-requests/' + requestId + '/guest')
+      .then(function (res) {
+        if (!res.ok) {
+          clearInterval(pollTimer);
+          showState('failed');
+          return null;
+        }
+        return res.json();
+      })
+      .then(function (data) {
+        if (!data) return;
+
+        if (data.status === 'approved') {
+          clearInterval(pollTimer);
+          document.getElementById('success-total').textContent = formatCurrency(data.total);
+          document.getElementById('success-business').textContent = data.businessName;
+          showState('success');
+          return;
+        }
+
+        if (data.status === 'declined' || data.status === 'cancelled' || data.status === 'error') {
+          clearInterval(pollTimer);
+          var msg = document.getElementById('failed-message');
+          if (data.status === 'declined') msg.textContent = 'Your payment was declined by the bank.';
+          else if (data.status === 'cancelled') msg.textContent = 'The payment was cancelled.';
+          else msg.textContent = 'Something went wrong with the payment.';
+          showState('failed');
+          return;
+        }
+
+        pollCount++;
+        if (pollCount >= MAX_POLLS) {
+          clearInterval(pollTimer);
+          showState('timeout');
+        }
+      })
+      .catch(function () {
+        clearInterval(pollTimer);
+        showState('failed');
+      });
+  }
+
+  showState('polling');
+  pollStatus();
+  pollTimer = setInterval(pollStatus, POLL_INTERVAL);
+})();
+</script>
+</body>
+</html>
