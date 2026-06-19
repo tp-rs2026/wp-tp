@@ -4,7 +4,7 @@
     "details": [
       {
         "appIDs": ["C46V87RPTL.co.tapara"],
-        "paths": ["/payment-return", "/verify-return*", "/stripe-return"]
+        "paths": ["/payment-return", "/verify-return*", "/stripe-return", "/checkin*"]
       }
     ]
   },
