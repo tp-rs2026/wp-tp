@@ -29,11 +29,12 @@
   var ROUTE_MAP = {
     '/': '/', '/consumers': '/consumers', '/businesses': '/businesses',
     '/merchants': '/businesses',
-    '/about': '/about', '/contact': '/contact',
-    '/terms': '/terms', '/privacy': '/privacy',
+    '/platform': '/platform', '/contact': '/contact',
+    '/terms': '/terms', '/consumer-terms': '/consumer-terms',
+    '/privacy': '/privacy',
     '/merchant-agreement': '/merchant-agreement',
     '/complaints': '/complaints', '/stripe-return': '/stripe-return',
-    '/open-banking': '/open-banking',
+    '/open-banking': '/open-banking', '/website-terms': '/website-terms',
     '/payment-return': '/payment-return'
   };
 
