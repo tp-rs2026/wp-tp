@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:tapara.co.nz)",
+      "Bash(curl:*)",
+      "WebFetch(domain:www.mastercard.co.nz)",
+      "WebFetch(domain:www.anz.co.nz)",
+      "WebFetch(domain:www.westpac.co.nz)",
+      "WebFetch(domain:www.asb.co.nz)",
+      "WebFetch(domain:www.bnz.co.nz)",
+      "WebFetch(domain:www.stuff.co.nz)",
+      "WebFetch(domain:blog.eftpos.co.nz)",
+      "WebFetch(domain:www.interest.co.nz)",
+      "WebFetch(domain:support.paymark.co.nz)",
+      "WebFetch(domain:eftpos.co.nz)",
+      "WebFetch(domain:congrify.com)",
+      "WebFetch(domain:www.rba.gov.au)",
+      "WebFetch(domain:www.ixopay.com)",
+      "WebFetch(domain:www.adyen.com)",
+      "WebFetch(domain:retail.kiwi)",
+      "WebFetch(domain:wise.com)",
+      "WebFetch(domain:www.comcom.govt.nz)",
+      "WebFetch(domain:www.zyber.co.nz)",
+      "WebFetch(domain:www.smartpay.co.nz)",
+      "WebFetch(domain:stripe.com)",
+      "WebFetch(domain:newswire.co.nz)",
+      "Bash(lsof:*)",
+      "Bash(git pull:*)",
+      "Bash(git add:*)",
+      "Bash(git rebase:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "WebFetch(domain:www.akahu.nz)",
+      "WebFetch(domain:developers.akahu.nz)"
+    ]
+  }
+}
