@@ -35,7 +35,8 @@
     '/merchant-agreement': '/merchant-agreement',
     '/complaints': '/complaints', '/stripe-return': '/stripe-return',
     '/open-banking': '/open-banking', '/website-terms': '/website-terms',
-    '/payment-return': '/payment-return'
+    '/payment-return': '/payment-return',
+    '/blog': '/blog'
   };
 
   function pageFromUrl(url) {
@@ -162,7 +163,7 @@
     if (!href || href === '#' || href.charAt(0) === '#') return;
     if (href.indexOf('://') !== -1 && href.indexOf(location.origin) !== 0) return;
     var clean = href.replace(/\.html$/, '').replace(/\/index$/, '/');
-    if (!(clean in ROUTE_MAP) && !/\.html$/.test(href)) return;
+    if (!(clean in ROUTE_MAP) && clean.indexOf('/blog/') !== 0 && !/\.html$/.test(href)) return;
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     if (a.hasAttribute('download') || a.target === '_blank') return;
 

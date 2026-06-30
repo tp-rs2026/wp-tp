@@ -3,20 +3,26 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>tapara | Returning to app</title>
-<meta name="description" content="Redirecting back to the Tapara app."/>
-<link href="assets/css/styles.css" rel="stylesheet"/>
-<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon_io/apple-touch-icon.png"/>
-<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon_io/favicon-32x32.png"/>
-<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon_io/favicon-16x16.png"/>
-<link rel="manifest" href="assets/favicon_io/site.webmanifest"/>
-<link rel="icon" type="image/x-icon" href="assets/favicon_io/favicon.ico"/>
+<title>tapara | Open banking payments now live</title>
+<meta name="description" content="Merchants on tapara can now accept bank-to-bank payments at near-zero fees. Customers pay directly from their bank account."/>
+<meta property="og:title" content="Open banking payments now live"/>
+<meta property="og:description" content="Merchants on tapara can now accept bank-to-bank payments at near-zero fees. Customers pay directly from their bank account."/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://tapara.co.nz/blog/open-banking-payments"/>
+<meta property="og:image" content="https://tapara.co.nz/assets/images/og-image.jpg"/>
+<meta property="article:published_time" content="2026-06-29"/>
+<link href="../assets/css/styles.css" rel="stylesheet"/>
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon_io/apple-touch-icon.png"/>
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon_io/favicon-32x32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon_io/favicon-16x16.png"/>
+<link rel="manifest" href="../assets/favicon_io/site.webmanifest"/>
+<link rel="icon" type="image/x-icon" href="../assets/favicon_io/favicon.ico"/>
 </head>
-<body class="bg-surface font-body text-on-surface antialiased">
+<body class="bg-surface text-on-surface font-body selection:bg-primary selection:text-white antialiased">
 <!-- Navigation -->
 <nav class="bg-white border-b border-neutral-200 sticky top-0 z-50">
 <div class="flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto">
-<a href="/" class="flex items-center font-serif text-2xl font-bold text-neutral-900"><img src="assets/images/tapara - logo.svg" alt="tapara logo" class="h-[55px] w-[55px]">tapara</a>
+<a href="/" class="flex items-center font-serif text-2xl font-bold text-neutral-900"><img src="../assets/images/tapara - logo.svg" alt="tapara logo" class="h-[55px] w-[55px]">tapara</a>
 <div class="hidden md:flex items-center gap-8">
 <a class="font-serif text-lg tracking-tight text-neutral-500 hover:text-neutral-800 transition-colors" href="/">Home</a>
 <a class="font-serif text-lg tracking-tight text-neutral-500 hover:text-neutral-800 transition-colors" href="/consumers">Consumers</a>
@@ -30,37 +36,34 @@ Join the waitlist
 </div>
 </nav>
 <main>
-<section class="min-h-[60vh] flex items-center justify-center px-6">
-<div class="max-w-md text-center space-y-8">
-<div class="flex justify-center">
-<img src="assets/images/tapara - logo.svg" alt="tapara" class="h-20 w-20 opacity-80"/>
-</div>
-<h1 class="font-headline text-3xl font-bold text-primary">Returning to tapara</h1>
-<p id="redirect-message" class="text-lg text-on-surface-variant leading-relaxed">Opening the tapara app&hellip;</p>
-<p id="fallback-message" class="text-lg text-on-surface-variant leading-relaxed hidden">If the app didn&rsquo;t open, return to the Tapara app manually to continue setup.</p>
-<a id="fallback-link" href="tapara://stripe-return" class="hidden inline-block bg-primary text-white px-8 py-4 rounded-full font-label text-sm uppercase tracking-[0.2em] hover:opacity-90 transition-all">
-Open tapara
+<!-- Article Header -->
+<section class="relative pt-24 pb-12 px-6 overflow-hidden bg-white">
+<div class="fern-overlay absolute inset-0 pointer-events-none"></div>
+<div class="max-w-3xl mx-auto relative z-10">
+<a href="/blog" class="inline-flex items-center gap-1 text-on-surface-variant font-sans text-sm font-medium hover:text-primary transition-colors mb-8">
+<span class="material-symbols-outlined text-sm">arrow_back</span> Back to blog
 </a>
+<div class="flex flex-wrap items-center gap-3 mb-6">
+<span class="inline-block bg-primary text-white text-xs font-sans font-medium uppercase tracking-[0.1em] px-3 py-1 rounded-full">Product</span>
+<span class="text-sm text-outline font-sans">29 Jun 2026</span>
+</div>
+<h1 class="font-headline text-4xl md:text-5xl font-bold text-primary tracking-tight leading-[1.1]">Open banking payments now live</h1>
 </div>
 </section>
-<script>
-(function () {
-  // Attempt deep link back to the app
-  window.location.href = 'tapara://stripe-return';
-
-  // If still on this page after 2 seconds, show fallback
-  setTimeout(function () {
-    var msg = document.getElementById('redirect-message');
-    var fallback = document.getElementById('fallback-message');
-    var link = document.getElementById('fallback-link');
-    if (msg) msg.classList.add('hidden');
-    if (fallback) fallback.classList.remove('hidden');
-    if (link) link.classList.remove('hidden');
-  }, 2000);
-})();
-</script>
+<!-- Article Content -->
+<section class="py-16 px-6 no-reveal">
+<div class="max-w-3xl mx-auto space-y-8">
+<p class="text-lg text-on-surface-variant leading-relaxed">Merchants on tapara can now accept bank-to-bank payments at near-zero fees. Customers pay directly from their bank account &mdash; no card network in the middle. Available for all merchants from day one.</p>
+<h2 class="font-headline text-2xl font-bold text-primary">How it works</h2>
+<p class="text-lg text-on-surface-variant leading-relaxed">When a customer pays through tapara, we initiate a bank-to-bank transfer using open banking rails. The payment moves directly from the customer&rsquo;s bank account to the merchant&rsquo;s bank account. Tapara is never in the flow of funds &mdash; we provide the technology layer that connects the two parties.</p>
+<p class="text-lg text-on-surface-variant leading-relaxed">This means merchants avoid the 2&ndash;3% processing fees charged by card networks. The cost of an open banking payment is a fraction of a card transaction, and we pass those economics on to merchants.</p>
+<h2 class="font-headline text-2xl font-bold text-primary">What this means for merchants</h2>
+<p class="text-lg text-on-surface-variant leading-relaxed">Every merchant on the tapara platform gets access to open banking payments from day one. There&rsquo;s no additional setup &mdash; once you&rsquo;re on tapara, your customers can pay by bank transfer, QR code, or cash. All payment channels are available in one app.</p>
+<h2 class="font-headline text-2xl font-bold text-primary">What this means for consumers</h2>
+<p class="text-lg text-on-surface-variant leading-relaxed">Paying with your bank account is simple. When you check in at a participating merchant or scan their QR code, you authenticate with your bank and confirm the payment. No card details to enter, no new account to create. Your payment goes straight from your bank to the merchant.</p>
+</div>
+</section>
 </main>
-<!-- Footer -->
 <footer class="bg-surface-container-low border-t border-outline-variant w-full py-12">
 <div class="grid grid-cols-1 md:grid-cols-4 gap-8 px-8 max-w-7xl mx-auto">
 <div>
@@ -113,6 +116,6 @@ Your local, remembered. A commerce network for New Zealand businesses and their 
 <span class="font-sans text-[8px] font-medium uppercase tracking-wide">Contact</span>
 </a>
 </div>
-<script src="assets/js/router.js"></script>
+<script src="../assets/js/router.js"></script>
 </body>
 </html>

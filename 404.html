@@ -12,8 +12,8 @@ if (payMatch) {
   sessionStorage.setItem('pay-request-id', payMatch[1]);
   location.replace('/pay');
 } else {
-  var routes = { '/': '/', '/consumers': '/', '/businesses': '/', '/merchants': '/', '/about': '/', '/contact': '/' };
-  if (path in routes) {
+  var routes = { '/': '/', '/consumers': '/', '/businesses': '/', '/merchants': '/', '/about': '/', '/contact': '/', '/blog': '/' };
+  if (path in routes || path.indexOf('/blog/') === 0) {
     sessionStorage.setItem('spa-redirect', path);
     location.replace('/');
   } else {
