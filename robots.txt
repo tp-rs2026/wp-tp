@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+Disallow: /pay
+Disallow: /pay-result
+Disallow: /payment-return
+Disallow: /stripe-return
+
+Sitemap: https://tapara.co.nz/sitemap.xml
