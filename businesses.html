@@ -10,18 +10,18 @@
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://tapara.co.nz/businesses"/>
 <meta property="og:image" content="https://tapara.co.nz/assets/images/og-image.jpg"/>
-<link href="assets/css/styles.css" rel="stylesheet"/>
-<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon_io/apple-touch-icon.png"/>
-<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon_io/favicon-32x32.png"/>
-<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon_io/favicon-16x16.png"/>
-<link rel="manifest" href="assets/favicon_io/site.webmanifest"/>
-<link rel="icon" type="image/x-icon" href="assets/favicon_io/favicon.ico"/>
+<link href="/assets/css/styles.css" rel="stylesheet"/>
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon_io/apple-touch-icon.png"/>
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon_io/favicon-32x32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon_io/favicon-16x16.png"/>
+<link rel="manifest" href="/assets/favicon_io/site.webmanifest"/>
+<link rel="icon" type="image/x-icon" href="/assets/favicon_io/favicon.ico"/>
 </head>
 <body class="bg-background text-on-background font-body selection:bg-primary-container selection:text-white antialiased">
 <!-- Navigation -->
 <nav class="bg-white border-b border-neutral-200 sticky top-0 z-50">
 <div class="flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto">
-<a href="/" class="flex items-center font-serif text-2xl font-bold text-neutral-900"><img src="assets/images/tapara - logo.svg" alt="tapara logo" class="h-[55px] w-[55px]">tapara</a>
+<a href="/" class="flex items-center font-serif text-2xl font-bold text-neutral-900"><img src="/assets/images/tapara - logo.svg" alt="tapara logo" class="h-[55px] w-[55px]">tapara</a>
 <div class="hidden md:flex items-center gap-8">
 <a class="font-serif text-lg tracking-tight text-neutral-500 hover:text-neutral-800 transition-colors" href="/">Home</a>
 <a class="font-serif text-lg tracking-tight text-neutral-500 hover:text-neutral-800 transition-colors" href="/consumers">Consumers</a>
@@ -30,7 +30,7 @@
 <a class="font-serif text-lg tracking-tight text-neutral-500 hover:text-neutral-800 transition-colors" href="/contact">Contact</a>
 </div>
 <a href="/contact" class="bg-primary text-on-primary px-6 py-2 rounded-full font-sans text-sm font-medium hover:opacity-80 transition-opacity">
-Join the waitlist
+Get the app
 </a>
 </div>
 </nav>
@@ -90,7 +90,7 @@ tapara gives your business a customer base with built-in loyalty, customer recog
 <div>
 <div class="w-[280px] aspect-[9/19] bg-primary rounded-[3rem] p-2 shadow-[0_25px_60px_rgba(10,10,10,0.15)] mx-auto">
 <div class="w-full h-full bg-white rounded-[2.5rem] overflow-hidden relative">
-<iframe src="assets/app-screens/employee_view_customer_identified.html" class="phone-iframe" style="transform: scale(0.677)" loading="lazy" onload="this.style.opacity=1" title="tapara merchant customer identification"></iframe>
+<iframe src="/assets/app-screens/employee_view_customer_identified.html" class="phone-iframe" style="transform: scale(0.677)" loading="lazy" onload="this.style.opacity=1" title="tapara merchant customer identification"></iframe>
 </div>
 </div>
 <p class="text-center mt-6 font-label text-sm uppercase tracking-widest text-outline">Customer checks in</p>
@@ -99,7 +99,7 @@ tapara gives your business a customer base with built-in loyalty, customer recog
 <div>
 <div class="w-[280px] aspect-[9/19] bg-primary rounded-[3rem] p-2 shadow-[0_25px_60px_rgba(10,10,10,0.15)] mx-auto">
 <div class="w-full h-full bg-white rounded-[2.5rem] overflow-hidden relative">
-<iframe src="assets/app-screens/analytics_overview.html" class="phone-iframe" style="transform: scale(0.677)" loading="lazy" onload="this.style.opacity=1" title="tapara merchant analytics dashboard"></iframe>
+<iframe src="/assets/app-screens/analytics_overview.html" class="phone-iframe" style="transform: scale(0.677)" loading="lazy" onload="this.style.opacity=1" title="tapara merchant analytics dashboard"></iframe>
 </div>
 </div>
 <p class="text-center mt-6 font-label text-sm uppercase tracking-widest text-outline">Your analytics dashboard</p>
@@ -307,10 +307,15 @@ The NZ government has signalled it will ban in-store payment surcharges. When it
 <section class="py-40 px-8 bg-white text-center border-t border-outline-variant">
 <div class="max-w-3xl mx-auto">
 <h2 class="text-5xl font-display font-bold mb-10">Ready to meet your regulars?</h2>
-<a href="/contact" class="inline-block bg-primary text-white px-12 py-5 rounded-full font-label text-sm uppercase tracking-[0.2em] hover:opacity-90 transition-all shadow-xl shadow-stone-200">
-Join the waitlist
+<div class="flex flex-wrap gap-4 justify-center items-center">
+<a href="https://apps.apple.com/nz/app/tapara/id6780735201" target="_blank" class="hover:opacity-80 transition-opacity">
+<img src="/assets/images/download_on_app_store.png" alt="Download on the App Store" class="h-14">
 </a>
-<p class="mt-8 text-outline text-sm">No terminal. No contracts. First 3 months free.</p>
+<a href="#" class="cursor-default">
+<img src="/assets/images/download_on_google_play.png" alt="Get it on Google Play" class="h-14">
+</a>
+</div>
+<p class="mt-8 text-outline text-sm">No terminal. No contracts. First 3 months free. Already set up? <a href="https://pos.tapara.co.nz" class="underline hover:text-on-surface transition-colors">Sign in on web.</a></p>
 </div>
 </section>
 <script>
@@ -415,6 +420,6 @@ Your local, remembered. A commerce network for New Zealand businesses and their 
 <span class="font-sans text-[8px] font-medium uppercase tracking-wide">Contact</span>
 </a>
 </div>
-<script src="assets/js/router.js"></script>
+<script src="/assets/js/router.js"></script>
 </body>
 </html>

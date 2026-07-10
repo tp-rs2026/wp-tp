@@ -36,7 +36,8 @@
     '/complaints': '/complaints', '/stripe-return': '/stripe-return',
     '/open-banking': '/open-banking', '/website-terms': '/website-terms',
     '/payment-return': '/payment-return',
-    '/blog': '/blog'
+    '/blog': '/blog',
+    '/delete-account': '/delete-account'
   };
 
   function pageFromUrl(url) {
