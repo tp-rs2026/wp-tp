@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>tapara | What Are Merchant Service Fees in New Zealand?</title>
-<meta name="description" content="A breakdown of the fees NZ businesses pay on every card transaction — interchange, scheme fees, acquirer margins — and how Open Banking changes the equation."/>
-<meta property="og:title" content="What Are Merchant Service Fees in New Zealand?"/>
-<meta property="og:description" content="A breakdown of the fees NZ businesses pay on every card transaction — interchange, scheme fees, acquirer margins — and how Open Banking changes the equation."/>
+<title>tapara | What Are Merchant Service Fees?</title>
+<meta name="description" content="A breakdown of the fees businesses pay on every card transaction — interchange, scheme fees, acquirer margins — and how Open Banking changes the equation."/>
+<meta property="og:title" content="What Are Merchant Service Fees?"/>
+<meta property="og:description" content="A breakdown of the fees businesses pay on every card transaction — interchange, scheme fees, acquirer margins — and how Open Banking changes the equation."/>
 <meta property="og:type" content="article"/>
 <meta property="og:url" content="https://tapara.co.nz/blog/merchant-service-fees-nz"/>
 <meta property="og:image" content="https://tapara.co.nz/assets/images/og-image.jpg"/>
@@ -14,8 +14,8 @@
 <meta property="og:image:height" content="630"/>
 <meta property="article:published_time" content="2026-07-14"/>
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="What Are Merchant Service Fees in New Zealand?"/>
-<meta name="twitter:description" content="A breakdown of the fees NZ businesses pay on every card transaction — interchange, scheme fees, acquirer margins — and how Open Banking changes the equation."/>
+<meta name="twitter:title" content="What Are Merchant Service Fees?"/>
+<meta name="twitter:description" content="A breakdown of the fees businesses pay on every card transaction — interchange, scheme fees, acquirer margins — and how Open Banking changes the equation."/>
 <meta name="twitter:image" content="https://tapara.co.nz/assets/images/og-image.jpg"/>
 <link href="../assets/css/styles.css" rel="stylesheet"/>
 <link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon_io/apple-touch-icon.png"/>
@@ -53,43 +53,49 @@ Get the app
 <span class="inline-block bg-primary text-white text-xs font-sans font-medium uppercase tracking-[0.1em] px-3 py-1 rounded-full">Guide</span>
 <span class="text-sm text-outline font-sans">14 Jul 2026</span>
 </div>
-<h1 class="font-headline text-4xl md:text-5xl font-bold text-primary tracking-tight leading-[1.1]">What Are Merchant Service Fees in New Zealand?</h1>
+<h1 class="font-headline text-4xl md:text-5xl font-bold text-primary tracking-tight leading-[1.1]">What Are Merchant Service Fees?</h1>
 </div>
 </section>
 <!-- Article Content -->
 <section class="py-16 px-6 no-reveal">
 <div class="max-w-3xl mx-auto space-y-8">
-<p class="text-lg text-on-surface-variant leading-relaxed">When a customer taps their card at your counter, the number on the screen is not the number that lands in your bank account. A slice of every transaction goes to a chain of intermediaries &mdash; card networks, banks, payment processors &mdash; before you see the rest. For most New Zealand merchants, these fees are accepted as a cost of doing business. Few understand exactly where the money goes or why. This guide breaks it down.</p>
+<p class="text-lg text-on-surface-variant leading-relaxed">When a customer taps their card at your counter, the number on the screen is not the number that lands in your bank account. A slice of every transaction goes to a chain of intermediaries &mdash; card networks, banks, payment processors &mdash; before you see the rest. For most merchants, these fees are accepted as a cost of doing business. Few understand exactly where the money goes or why. This guide breaks it down.</p>
 
 <h2 class="font-headline text-2xl font-bold text-primary">The anatomy of a card payment</h2>
+<div class="dc-visual my-8 rounded-2xl overflow-hidden border border-outline-variant">
+<iframe scrolling="no" src="assets/Merchant Fees - Card Payment Flow.dc.html" loading="lazy" title="The anatomy of a card payment — where your $5 coffee actually goes"></iframe>
+</div>
 <p class="text-lg text-on-surface-variant leading-relaxed">A customer walks into your cafe and buys a $5 flat white. They tap their debit card. The transaction looks instant, but behind the scenes, several parties take a cut before the $5 reaches you.</p>
-<p class="text-lg text-on-surface-variant leading-relaxed"><strong>Interchange fee.</strong> This is the largest component. It goes to the cardholder&rsquo;s bank &mdash; the bank that issued the customer&rsquo;s card. In New Zealand, interchange fees typically range from 0.5% to 1.5% of the transaction value, depending on the card type. A premium credit card costs you more than a standard debit card. On that $5 coffee, interchange might take 3&ndash;8 cents.</p>
+<p class="text-lg text-on-surface-variant leading-relaxed"><strong>Interchange fee.</strong> This is the largest component. It goes to the cardholder&rsquo;s bank &mdash; the bank that issued the customer&rsquo;s card. In New Zealand, interchange fees are now regulated by the Commerce Commission. Domestic contactless debit is capped at 0.20%, and domestic in-person credit is capped at 0.30%. Online credit transactions are capped at 0.70%. Commercial and foreign-issued cards carry higher rates. On that $5 coffee paid with a domestic credit card in-store, interchange takes about 1.5 cents.</p>
 <p class="text-lg text-on-surface-variant leading-relaxed"><strong>Scheme fee.</strong> This goes to the card network itself &mdash; Visa or Mastercard. They operate the global rails that route the transaction between banks. Scheme fees are smaller, typically around 0.05% to 0.15% of the transaction. On a $5 purchase, that&rsquo;s less than a cent. But across thousands of transactions a month, it adds up.</p>
 <p class="text-lg text-on-surface-variant leading-relaxed"><strong>Acquirer margin.</strong> This is the fee charged by your payment processor &mdash; the company that provides your EFTPOS terminal and settles funds into your bank account. The acquirer bundles the interchange and scheme fees together, adds their own margin on top, and charges you a single merchant service fee. This margin varies depending on the provider, your transaction volume, and your negotiating power. Small businesses almost always pay more than large retailers.</p>
 <p class="text-lg text-on-surface-variant leading-relaxed"><strong>Terminal rental.</strong> On top of percentage-based fees, most merchants pay a monthly lease for their EFTPOS terminal. This typically runs $30 to $80 per month, depending on the terminal model and contract terms. Some providers lock merchants into multi-year contracts with early termination fees.</p>
-<p class="text-lg text-on-surface-variant leading-relaxed">Add it all up, and your $5 flat white might cost you 10 to 15 cents in fees. That sounds small until you multiply it across every transaction, every day, every month. A cafe doing $500,000 a year in card sales could be paying $10,000 to $15,000 or more annually in merchant service fees alone.</p>
+<p class="text-lg text-on-surface-variant leading-relaxed">Add it all up, and your $5 flat white might cost you 5 to 10 cents in fees on a domestic card. That sounds small until you multiply it across every transaction, every day, every month. A cafe doing $500,000 a year in card sales could still be paying $5,000 to $10,000 or more annually in merchant service fees &mdash; and significantly more if you accept a lot of commercial or foreign-issued cards, where interchange caps are higher or don&rsquo;t apply.</p>
 
-<h2 class="font-headline text-2xl font-bold text-primary">Why are NZ fees higher than Australia?</h2>
-<p class="text-lg text-on-surface-variant leading-relaxed">Across the Tasman, the Reserve Bank of Australia has regulated interchange fees since 2003. The result: Australian interchange is capped at a weighted average of around 0.5% for credit cards and even lower for debit. Australian merchants pay significantly less per transaction than their New Zealand counterparts.</p>
-<p class="text-lg text-on-surface-variant leading-relaxed">New Zealand has no equivalent regulation. Interchange rates are set by the card networks and negotiated between banks with limited transparency. The Commerce Commission has noted that New Zealand merchants pay among the highest card acceptance costs in the developed world. For small and medium businesses without the leverage to negotiate better rates, this cost is especially burdensome.</p>
-<p class="text-lg text-on-surface-variant leading-relaxed">The Retail NZ Payment Survey has consistently highlighted this gap. A small retailer in Auckland pays a higher percentage on every card tap than a comparable shop in Sydney. The difference flows directly to the bottom line &mdash; or, more often, gets passed on through higher prices to consumers.</p>
+<h2 class="font-headline text-2xl font-bold text-primary">How regulation has changed the picture</h2>
+<p class="text-lg text-on-surface-variant leading-relaxed">New Zealand&rsquo;s Commerce Commission began regulating interchange fees in November 2022, following years of concern that merchants were paying some of the highest card acceptance costs in the developed world. The initial caps delivered estimated savings of $140 million per year for businesses.</p>
+<p class="text-lg text-on-surface-variant leading-relaxed">In December 2025, further caps took effect. Domestic in-person credit card interchange dropped from 0.80% to 0.30%. Online credit fell from 0.80% to 0.70%. From May 2026, foreign-issued cards were regulated for the first time &mdash; with in-person foreign credit capped at 0.70% and foreign debit at 0.60%. These additional caps are estimated to save businesses another $100 million annually.</p>
+<p class="text-lg text-on-surface-variant leading-relaxed">The regulation has meaningfully reduced the interchange component of merchant service fees. However, interchange is only one layer. Scheme fees, acquirer margins, and terminal rental costs still apply. And whether acquirers actually pass the savings through to merchants &mdash; particularly small ones without negotiating leverage &mdash; remains an open question the Commission is actively monitoring.</p>
 
 <h2 class="font-headline text-2xl font-bold text-primary">The hidden cost: no customer data</h2>
 <p class="text-lg text-on-surface-variant leading-relaxed">There is another cost to card payments that doesn&rsquo;t appear on any statement. When a customer taps their card, the merchant receives the funds &mdash; minus fees &mdash; but learns nothing about the customer. No name. No contact details. No purchase history. The transaction is functionally anonymous.</p>
 <p class="text-lg text-on-surface-variant leading-relaxed">This means you cannot recognise a regular. You cannot send them a follow-up offer. You cannot build a loyalty programme around actual spending behaviour. You cannot even say &ldquo;welcome back&rdquo; with any certainty. Card payments process the transaction and nothing else.</p>
 <p class="text-lg text-on-surface-variant leading-relaxed">For independent businesses that thrive on relationships with their regulars, this is a significant gap. You are paying a fee on every transaction but receiving no customer intelligence in return. The data about your own customers lives with the banks and card networks, not with you.</p>
 
+<div class="dc-visual my-8 rounded-2xl overflow-hidden border border-outline-variant">
+<iframe scrolling="no" src="assets/Merchant Fees - Card vs Open Banking.dc.html" loading="lazy" title="Card payments vs Open Banking — fee comparison" data-height="720"></iframe>
+</div>
+
 <h2 class="font-headline text-2xl font-bold text-primary">What is Open Banking and how does it change fees?</h2>
 <p class="text-lg text-on-surface-variant leading-relaxed">Open Banking is a framework that lets authorised third parties initiate payments directly between bank accounts using secure APIs. Instead of routing a transaction through Visa or Mastercard, the payment goes straight from the consumer&rsquo;s bank to the merchant&rsquo;s bank. No card network in the middle.</p>
 <p class="text-lg text-on-surface-variant leading-relaxed">Here is what that means for fees: no interchange fee, because there is no issuing bank taking a cut from a card transaction. No scheme fee, because Visa and Mastercard are not involved. The consumer authorises the payment directly from their banking app, and the funds move bank-to-bank.</p>
-<p class="text-lg text-on-surface-variant leading-relaxed">New Zealand&rsquo;s Open Banking framework, led by the API Centre and supported by major banks, has been developing the rails for this. The Consumer Data Right legislation and the growing adoption of payment initiation APIs are making this a practical reality for everyday commerce &mdash; not just fintech experiments.</p>
+<p class="text-lg text-on-surface-variant leading-relaxed">Open Banking frameworks are now live in multiple markets. In New Zealand, the API Centre and major banks support payment initiation APIs that make bank-to-bank payments a practical reality for everyday commerce &mdash; not just fintech experiments.</p>
 <p class="text-lg text-on-surface-variant leading-relaxed">For merchants, the implications are straightforward. Bank-to-bank payments can dramatically reduce the per-transaction cost. No terminal rental is required for these payments. And because the consumer authenticates with their bank, the payment is secure by design.</p>
 
 <h2 class="font-headline text-2xl font-bold text-primary">What tapara does differently</h2>
 <p class="text-lg text-on-surface-variant leading-relaxed">tapara uses Open Banking to offer merchants bank-to-bank payments at near-zero fees. When a customer pays with tapara, the money moves directly from their bank account to the merchant&rsquo;s. No card network, no interchange, no scheme fee.</p>
-<p class="text-lg text-on-surface-variant leading-relaxed">For customers who prefer to pay by card, tapara also supports Tap to Pay &mdash; contactless card acceptance on the merchant&rsquo;s device. Standard card processing fees apply for these transactions, as they still route through the card networks. Merchants have both options available from a single platform.</p>
-<p class="text-lg text-on-surface-variant leading-relaxed">Every payment through tapara &mdash; whether bank or card &mdash; also captures customer identity. The merchant knows who paid, how often they visit, and what they buy. This enables loyalty programmes, punch cards, and targeted campaigns that are impossible with anonymous card transactions. The payment itself becomes the foundation for a customer relationship, not just a transfer of funds.</p>
-<p class="text-lg text-on-surface-variant leading-relaxed">If you run a business in New Zealand and want to understand how this works in practice, visit the <a href="/businesses" class="underline hover:text-primary transition-colors">businesses page</a> or <a href="/contact" class="underline hover:text-primary transition-colors">get in touch</a>.</p>
+<p class="text-lg text-on-surface-variant leading-relaxed">Every payment through tapara also captures customer identity. The merchant knows who paid, how often they visit, and what they buy. This enables loyalty programmes, punch cards, and targeted campaigns that are impossible with anonymous card transactions. The payment itself becomes the foundation for a customer relationship, not just a transfer of funds.</p>
+<p class="text-lg text-on-surface-variant leading-relaxed">If you run a business and want to understand how this works in practice, visit the <a href="https://tapara.co.nz/businesses" class="underline hover:text-primary transition-colors">businesses page</a> or <a href="https://tapara.co.nz/contact" class="underline hover:text-primary transition-colors">get in touch</a>.</p>
 </div>
 </section>
 </main>
@@ -145,6 +151,7 @@ Your local, remembered. A commerce network for New Zealand businesses and their 
 <span class="font-sans text-[8px] font-medium uppercase tracking-wide">Contact</span>
 </a>
 </div>
+<script src="assets/dc-embed.js"></script>
 <script src="../assets/js/router.js"></script>
 </body>
 </html>

@@ -1,0 +1,156 @@
+/* ============================================================
+   TAPARA — Colors & Type
+   Source of truth: tapara/src/constants/theme.ts (shipped app)
+   Pure monochrome. No gradients. No accent colours.
+   ============================================================ */
+
+/* ---- Fonts ---------------------------------------------------
+   Headlines & amounts -> Noto Serif (bold). Body & UI -> Manrope.
+   (The brand deck names "Playfair Display / DM Sans" but the
+    shipped React Native app loads Noto Serif + Manrope — those
+    are the real, authoritative families and are used here.)
+--------------------------------------------------------------- */
+@font-face {
+  font-family: 'Noto Serif';
+  src: url('fonts/NotoSerif-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Noto Serif';
+  src: url('fonts/NotoSerif-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Manrope';
+  src: url('fonts/Manrope-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Manrope';
+  src: url('fonts/Manrope-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ---- Core palette (theme.ts colors) ---- */
+  --tapara-primary:   #0A0A0A;  /* near-black — dominant, text, fills, buttons */
+  --tapara-secondary: #888888;  /* mid grey — labels, captions, secondary text */
+  --tapara-tertiary:  #E0E0DC;  /* warm grey — borders, dividers, tracks */
+  --tapara-neutral:   #F5F5F3;  /* off-white — surfaces, cards, fills */
+  --tapara-white:     #FFFFFF;  /* pure white — primary background */
+
+  /* ---- Semantic status (used sparingly) ---- */
+  --tapara-success:   #1D9E75;  /* confirmations, discounts, swipe-complete */
+  --tapara-error:     #E24B4A;  /* declines, errors, destructive */
+  --tapara-tag-pad:   #EEEEEC;  /* NFC pad order-tag background */
+
+  /* ---- Semantic foreground aliases ---- */
+  --fg-1: var(--tapara-primary);    /* primary text */
+  --fg-2: var(--tapara-secondary);  /* secondary text */
+  --fg-on-dark: var(--tapara-white);
+
+  /* ---- Semantic surfaces ---- */
+  --bg:          var(--tapara-white);
+  --bg-sunken:   var(--tapara-neutral);
+  --bg-inverse:  var(--tapara-primary);
+  --border:      var(--tapara-tertiary);
+  --border-hairline: rgba(10,10,10,0.08);
+
+  /* ---- Type families ---- */
+  --font-serif: 'Noto Serif', 'Playfair Display', Georgia, serif;  /* display, headings, amounts */
+  --font-sans:  'Manrope', 'DM Sans', -apple-system, system-ui, sans-serif; /* body, UI, labels */
+
+  /* ---- Type scale (px @ 375pt base, the app's reference width) ----
+     Names map to how the app uses them. Amounts use serif at large
+     sizes; UI/labels use sans. Letter-spacing on small caps labels. */
+  --text-display:  42px; /* hero amounts: TOTAL SAVED, payment TOTAL */
+  --text-h1:       32px; /* onboarding titles */
+  --text-h2:       28px; /* screen headers, merchant/business names */
+  --text-h3:       24px; /* section headings */
+  --text-h4:       20px; /* card titles, consumer names */
+  --text-body:     15px; /* default body, list rows */
+  --text-body-sm:  14px; /* secondary body */
+  --text-label:    13px; /* captions */
+  --text-caption:  12px; /* fine print */
+  --text-overline: 11px; /* ALL-CAPS labels (letter-spacing 1.5) */
+  --text-micro:    10px; /* tiny ALL-CAPS metadata (letter-spacing 2) */
+
+  /* ---- Weights ---- */
+  --weight-regular: 400;
+  --weight-medium:  500; /* Manrope-Medium — the app's emphasis weight */
+  --weight-bold:    700; /* Noto Serif Bold — display headings */
+
+  /* ---- Tracking (letter-spacing) for caps labels ---- */
+  --track-overline: 1.5px;
+  --track-micro:    2px;
+  --track-button:   1px;
+
+  /* ---- Spacing scale (theme.ts spacing, 375pt base) ---- */
+  --space-xs:  4px;
+  --space-sm:  8px;
+  --space-md:  16px;
+  --space-lg:  24px;
+  --space-xl:  32px;
+  --space-xxl: 48px;
+
+  /* ---- Radii ----
+     Pills for buttons/segments/tags; soft rounding for cards. */
+  --radius-pill:  999px; /* buttons, segment control, status pills, tags */
+  --radius-card:  16px;  /* default card */
+  --radius-card-lg: 20px; /* feature cards (savings) */
+  --radius-sheet: 24px;  /* sheet / dark-header bottom corners */
+  --radius-input: 12px;  /* text fields, subtotal rows */
+  --radius-code:  8px;   /* voucher code chips */
+
+  /* ---- Elevation ----
+     "Editorial" shadow — very soft, tall, low-opacity black. Used on
+     white cards that sit on white. Most surfaces use borders, not shadow. */
+  --shadow-editorial: 0 12px 40px rgba(10,10,10,0.04);
+  --shadow-receipt:   0 2px 12px rgba(10,10,10,0.08);
+
+  /* ---- Hit target ---- */
+  --hit-min: 52px; /* primary button min height; 44px absolute floor */
+}
+
+/* ============================================================
+   Semantic element styles — apply with .tapara scope or copy
+   ============================================================ */
+.tapara-display {
+  font-family: var(--font-serif);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-display);
+  color: var(--fg-1);
+  line-height: 1.05;
+}
+.tapara-h1 { font-family: var(--font-serif); font-weight: var(--weight-bold); font-size: var(--text-h1); line-height: 1.25; color: var(--fg-1); }
+.tapara-h2 { font-family: var(--font-serif); font-weight: var(--weight-bold); font-size: var(--text-h2); line-height: 1.2; color: var(--fg-1); }
+.tapara-h3 { font-family: var(--font-serif); font-weight: var(--weight-bold); font-size: var(--text-h3); line-height: 1.2; color: var(--fg-1); }
+.tapara-h4 { font-family: var(--font-serif); font-weight: var(--weight-bold); font-size: var(--text-h4); line-height: 1.25; color: var(--fg-1); }
+
+.tapara-body { font-family: var(--font-sans); font-weight: var(--weight-regular); font-size: var(--text-body); line-height: 1.5; color: var(--fg-1); }
+.tapara-body-secondary { font-family: var(--font-sans); font-weight: var(--weight-regular); font-size: var(--text-body); line-height: 1.5; color: var(--fg-2); }
+
+.tapara-overline {
+  font-family: var(--font-sans);
+  font-weight: var(--weight-medium);
+  font-size: var(--text-overline);
+  letter-spacing: var(--track-overline);
+  text-transform: uppercase;
+  color: var(--fg-2);
+}
+.tapara-micro {
+  font-family: var(--font-sans);
+  font-weight: var(--weight-medium);
+  font-size: var(--text-micro);
+  letter-spacing: var(--track-micro);
+  text-transform: uppercase;
+  color: var(--fg-2);
+}

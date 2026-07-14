@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<style>body{margin:0;overflow:hidden}</style>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/tapara-design-system-074ae7c6-13c9-470b-b3fa-c71ecdaeb0c9/colors_and_type.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+</helmet>
+<div style="width:1200px;height:600px;box-sizing:border-box;background:#FFFFFF;font-family:'Manrope',sans-serif;color:#0A0A0A;padding:48px 56px;display:flex;flex-direction:column;">
+
+  <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:36px;">
+    <span style="font-family:'Manrope';font-weight:500;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#888888;">When you can't surcharge</span>
+    <h2 style="font-family:'Noto Serif';font-weight:700;font-size:30px;line-height:1.15;margin:0;">The bill lands on you now.</h2>
+  </div>
+
+  <div style="display:flex;gap:40px;flex:1;align-items:stretch;">
+
+    <!-- Range bar -->
+    <div style="flex:1.35;display:flex;flex-direction:column;">
+      <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:6px;">
+        <span style="font-family:'Noto Serif';font-weight:700;font-size:24px;">$500,000</span>
+        <span style="font-family:'Manrope';font-size:15px;color:#888888;">in annual card revenue</span>
+      </div>
+      <div style="font-family:'Manrope';font-weight:500;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#888888;margin-bottom:22px;">Annual fees you absorb once surcharging is banned</div>
+
+      <div style="position:relative;height:64px;border-radius:12px;background:#F5F5F3;overflow:hidden;">
+        <div style="position:absolute;top:0;bottom:0;left:14%;width:36%;background:#0A0A0A;border-radius:8px;"></div>
+      </div>
+      <div style="position:relative;height:26px;margin-top:10px;font-family:'Manrope';font-size:13px;color:#888888;">
+        <span style="position:absolute;left:0;">$0</span>
+        <span style="position:absolute;left:14%;transform:translateX(-50%);font-weight:500;color:#0A0A0A;font-family:'Noto Serif';font-size:16px;top:-2px;">$3,500</span>
+        <span style="position:absolute;left:50%;transform:translateX(-50%);font-weight:500;color:#0A0A0A;font-family:'Noto Serif';font-size:16px;top:-2px;">$12,500</span>
+        <span style="position:absolute;right:0;">$20k</span>
+      </div>
+
+      <div style="margin-top:auto;display:flex;align-items:center;gap:10px;padding-top:22px;">
+        <span class="material-symbols-outlined" style="font-size:20px;color:#888888;">info</span>
+        <span style="font-family:'Manrope';font-size:14px;color:#888888;">A cost that used to sit with the customer, now paid straight out of margin.</span>
+      </div>
+    </div>
+
+    <div style="width:1px;background:#E0E0DC;"></div>
+
+    <!-- Per transaction math -->
+    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:18px;">
+      <div style="font-family:'Manrope';font-weight:500;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#888888;">What a surcharge recovered</div>
+
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <div><div style="font-family:'Noto Serif';font-weight:700;font-size:28px;">$5.50</div><div style="font-family:'Manrope';font-size:14px;color:#888888;">flat white</div></div>
+        <span class="material-symbols-outlined" style="font-size:24px;color:#E0E0DC;">add</span>
+        <div><div style="font-family:'Noto Serif';font-weight:700;font-size:28px;">2%</div><div style="font-family:'Manrope';font-size:14px;color:#888888;">surcharge</div></div>
+        <span class="material-symbols-outlined" style="font-size:24px;color:#E0E0DC;">drag_handle</span>
+        <div><div style="font-family:'Noto Serif';font-weight:700;font-size:28px;">11¢</div><div style="font-family:'Manrope';font-size:14px;color:#888888;">recovered</div></div>
+      </div>
+
+      <div style="padding:16px 18px;background:#F5F5F3;border-radius:12px;display:flex;align-items:center;gap:12px;">
+        <span class="material-symbols-outlined" style="font-size:22px;color:#0A0A0A;">multiple_stop</span>
+        <span style="font-family:'Manrope';font-size:15px;line-height:1.45;">11¢ looks like nothing — until you multiply it across <span style="font-weight:500;">hundreds of transactions a day</span>.</span>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1200,&quot;height&quot;:600}}"></script>
+</body>
+</html>
