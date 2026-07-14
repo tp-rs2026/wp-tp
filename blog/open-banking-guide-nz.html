@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>tapara | Open Banking in New Zealand: A Guide for Businesses</title>
+<meta name="description" content="What Open Banking means for NZ businesses — how bank-to-bank payments work, who's involved, and why it matters for merchant fees."/>
+<meta property="og:title" content="Open Banking in New Zealand: A Guide for Businesses"/>
+<meta property="og:description" content="What Open Banking means for NZ businesses — how bank-to-bank payments work, who's involved, and why it matters for merchant fees."/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://tapara.co.nz/blog/open-banking-guide-nz"/>
+<meta property="og:image" content="https://tapara.co.nz/assets/images/og-image.jpg"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="article:published_time" content="2026-07-14"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Open Banking in New Zealand: A Guide for Businesses"/>
+<meta name="twitter:description" content="What Open Banking means for NZ businesses — how bank-to-bank payments work, who's involved, and why it matters for merchant fees."/>
+<meta name="twitter:image" content="https://tapara.co.nz/assets/images/og-image.jpg"/>
+<link href="../assets/css/styles.css" rel="stylesheet"/>
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon_io/apple-touch-icon.png"/>
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon_io/favicon-32x32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon_io/favicon-16x16.png"/>
+<link rel="manifest" href="../assets/favicon_io/site.webmanifest"/>
+<link rel="icon" type="image/x-icon" href="../assets/favicon_io/favicon.ico"/>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary selection:text-white antialiased">
+<!-- Navigation -->
+<nav class="bg-white border-b border-neutral-200 sticky top-0 z-50">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto">
+<a href="/" class="flex items-center font-serif text-2xl font-bold text-neutral-900"><img src="../assets/images/tapara - logo.svg" alt="tapara logo" class="h-[55px] w-[55px]">tapara</a>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-serif text-lg tracking-tight text-neutral-500 hover:text-neutral-800 transition-colors" href="/">Home</a>
+<a class="font-serif text-lg tracking-tight text-neutral-500 hover:text-neutral-800 transition-colors" href="/consumers">Consumers</a>
+<a class="font-serif text-lg tracking-tight text-neutral-500 hover:text-neutral-800 transition-colors" href="/businesses">Businesses</a>
+<a class="font-serif text-lg tracking-tight text-neutral-500 hover:text-neutral-800 transition-colors" href="/platform">Platform</a>
+<a class="font-serif text-lg tracking-tight text-neutral-500 hover:text-neutral-800 transition-colors" href="/contact">Contact</a>
+</div>
+<a href="/contact" class="bg-primary text-on-primary px-6 py-2 rounded-full font-sans text-sm font-medium hover:opacity-80 transition-opacity">
+Get the app
+</a>
+</div>
+</nav>
+<main>
+<!-- Article Header -->
+<section class="relative pt-24 pb-12 px-6 overflow-hidden bg-white">
+<div class="fern-overlay absolute inset-0 pointer-events-none"></div>
+<div class="max-w-3xl mx-auto relative z-10">
+<a href="/blog" class="inline-flex items-center gap-1 text-on-surface-variant font-sans text-sm font-medium hover:text-primary transition-colors mb-8">
+<span class="material-symbols-outlined text-sm">arrow_back</span> Back to blog
+</a>
+<div class="flex flex-wrap items-center gap-3 mb-6">
+<span class="inline-block bg-primary text-white text-xs font-sans font-medium uppercase tracking-[0.1em] px-3 py-1 rounded-full">Guide</span>
+<span class="text-sm text-outline font-sans">14 Jul 2026</span>
+</div>
+<h1 class="font-headline text-4xl md:text-5xl font-bold text-primary tracking-tight leading-[1.1]">Open Banking in New Zealand: A Guide for Businesses</h1>
+</div>
+</section>
+<!-- Article Content -->
+<section class="py-16 px-6 no-reveal">
+<div class="max-w-3xl mx-auto space-y-8">
+<p class="text-lg text-on-surface-variant leading-relaxed">Open Banking is changing how money moves in New Zealand. For businesses, it means a new payment option that bypasses card networks entirely &mdash; reducing fees, simplifying settlement, and giving customers more choice at the point of sale. Whether you run a caf&eacute;, a retail store, or a service business, here&rsquo;s what you need to know.</p>
+
+<h2 class="font-headline text-2xl font-bold text-primary">What is Open Banking?</h2>
+<p class="text-lg text-on-surface-variant leading-relaxed">Open Banking lets regulated third parties access bank account data and initiate payments through secure APIs, with the account holder&rsquo;s explicit consent. Rather than building proprietary connections to each bank, third-party providers use standardised interfaces that banks are required to support.</p>
+<p class="text-lg text-on-surface-variant leading-relaxed">In New Zealand, Open Banking is managed by <a href="https://www.apicentre.paymentsnz.co.nz/" target="_blank" class="underline hover:text-primary transition-colors">Payments NZ through the API Centre</a>. The API Centre sets the technical standards, security requirements, and consent frameworks that govern how third parties connect to banks. The major participating banks include ANZ, ASB, BNZ, Kiwibank, and Westpac &mdash; which between them serve the vast majority of New Zealand&rsquo;s personal and business bank accounts.</p>
+
+<h2 class="font-headline text-2xl font-bold text-primary">How does a bank-to-bank payment work?</h2>
+<p class="text-lg text-on-surface-variant leading-relaxed">A bank-to-bank payment through Open Banking is straightforward. Here&rsquo;s the typical flow from the customer&rsquo;s perspective:</p>
+<ol class="list-decimal list-outside pl-6 space-y-2 text-lg text-on-surface-variant leading-relaxed">
+<li>The customer chooses to pay via their bank at checkout.</li>
+<li>They&rsquo;re redirected to their own bank&rsquo;s app or website.</li>
+<li>They authenticate using their bank&rsquo;s security &mdash; Face ID, fingerprint, or password.</li>
+<li>They review the payment details and confirm.</li>
+<li>The money moves directly from their bank account to the merchant&rsquo;s bank account.</li>
+</ol>
+<p class="text-lg text-on-surface-variant leading-relaxed">There&rsquo;s no card number involved, no card network processing the transaction, and no terminal required. The payment travels on banking rails, not card rails.</p>
+
+<h2 class="font-headline text-2xl font-bold text-primary">What does this mean for fees?</h2>
+<p class="text-lg text-on-surface-variant leading-relaxed">To understand why Open Banking matters for merchants, it helps to see how a typical card payment flows. When a customer taps their Visa or Mastercard, the payment passes through multiple intermediaries: the card network (Visa or Mastercard), the issuing bank (the customer&rsquo;s bank), and the acquiring bank or payment processor (the merchant&rsquo;s side). Each layer takes a cut &mdash; interchange fees, scheme fees, and acquirer margins. By the time the merchant receives the funds, 2&ndash;3% of the transaction value has been absorbed by these fees.</p>
+<p class="text-lg text-on-surface-variant leading-relaxed">An Open Banking payment removes most of these layers. The money moves from the consumer&rsquo;s bank directly to the merchant&rsquo;s bank. There&rsquo;s no interchange fee, no card scheme fee, and no acquirer margin. The result is a payment that costs a fraction of what card processing charges &mdash; a meaningful difference for businesses operating on tight margins.</p>
+
+<h2 class="font-headline text-2xl font-bold text-primary">Is it safe?</h2>
+<p class="text-lg text-on-surface-variant leading-relaxed">Yes. Open Banking payments are built on strong authentication. Every payment requires the customer to authenticate directly with their own bank using the bank&rsquo;s own security &mdash; biometrics, PIN, or password. The third-party provider that initiates the payment never sees the customer&rsquo;s banking credentials and never has access to their account.</p>
+<p class="text-lg text-on-surface-variant leading-relaxed">No card details are shared or stored at any point in the process. There&rsquo;s no card number to be stolen, no CVV to be compromised. The customer approves each payment individually through their trusted banking app. The entire framework is regulated under New Zealand&rsquo;s banking and financial services standards, and the API Centre&rsquo;s own security requirements add an additional layer of governance.</p>
+
+<h2 class="font-headline text-2xl font-bold text-primary">Who&rsquo;s using it?</h2>
+<p class="text-lg text-on-surface-variant leading-relaxed">Open Banking payments are live in New Zealand today. Companies like <a href="https://www.akahu.nz/" target="_blank" class="underline hover:text-primary transition-colors">Akahu</a> and <a href="https://www.blinkpay.co.nz/" target="_blank" class="underline hover:text-primary transition-colors">BlinkPay</a> provide the API infrastructure that connects third-party providers to the banks. Businesses can accept bank payments through platforms that integrate with these providers, without needing to build bank connections themselves.</p>
+<p class="text-lg text-on-surface-variant leading-relaxed">Adoption is growing steadily. As more consumers become familiar with paying from their bank account &mdash; rather than reaching for a card &mdash; businesses that offer the option are seeing real take-up, particularly for higher-value transactions where card fees bite hardest.</p>
+
+<h2 class="font-headline text-2xl font-bold text-primary">What about card payments?</h2>
+<p class="text-lg text-on-surface-variant leading-relaxed">Open Banking doesn&rsquo;t replace cards &mdash; it adds an alternative. Some customers will prefer bank payments, especially when they see it helps the businesses they frequent. Others will continue to prefer cards out of habit, for the credit facility, or to earn rewards points. Both are valid choices.</p>
+<p class="text-lg text-on-surface-variant leading-relaxed">For businesses, the smartest approach is to offer both. Accepting bank payments gives you access to lower-cost transactions, while keeping cards ensures you don&rsquo;t turn away customers who prefer them. The more payment options you support, the more flexibility your customers have &mdash; and the more control you have over your payment costs.</p>
+
+<h2 class="font-headline text-2xl font-bold text-primary">What tapara does</h2>
+<p class="text-lg text-on-surface-variant leading-relaxed">Tapara is a <a href="https://www.apicentre.paymentsnz.co.nz/join/api-standards-user/current-standards-users/" target="_blank" class="underline hover:text-primary transition-colors">member of the API Centre</a> and uses Open Banking as its bank payment rail. Merchants on the tapara platform can accept bank-to-bank payments at near-zero fees &mdash; no terminal required, no card network in the middle. Customers pay by scanning a QR code or checking in through the tapara app, then confirming the payment through their own bank.</p>
+<p class="text-lg text-on-surface-variant leading-relaxed">Card payments are also supported via Tap to Pay on iPhone, so merchants have a complete payment solution in a single app. Whether a customer wants to pay by bank or by card, tapara handles both.</p>
+<p class="text-lg text-on-surface-variant leading-relaxed">To learn more about how Open Banking works on tapara, visit our <a href="/open-banking" class="underline hover:text-primary transition-colors">Open Banking</a> page. If you&rsquo;re a business ready to get started, head to <a href="/businesses" class="underline hover:text-primary transition-colors">Businesses</a> to find out how to join the platform.</p>
+</div>
+</section>
+</main>
+<footer class="bg-surface-container-low border-t border-outline-variant w-full py-12">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 px-8 max-w-7xl mx-auto">
+<div>
+<div class="font-serif text-xl font-bold text-neutral-900 mb-4">tapara</div>
+<p class="font-sans text-sm text-neutral-600 max-w-xs">
+Your local, remembered. A commerce network for New Zealand businesses and their regulars.
+</p>
+</div>
+<div class="flex flex-col gap-2">
+<span class="font-sans text-xs font-medium uppercase tracking-widest text-outline mb-1">Navigate</span>
+<a class="font-sans text-sm text-neutral-600 hover:text-neutral-900 underline decoration-transparent hover:decoration-current transition-all" href="/">Home</a>
+<a class="font-sans text-sm text-neutral-600 hover:text-neutral-900 underline decoration-transparent hover:decoration-current transition-all" href="/consumers">Consumers</a>
+<a class="font-sans text-sm text-neutral-600 hover:text-neutral-900 underline decoration-transparent hover:decoration-current transition-all" href="/businesses">Businesses</a>
+<a class="font-sans text-sm text-neutral-600 hover:text-neutral-900 underline decoration-transparent hover:decoration-current transition-all" href="/platform">Platform</a>
+<a class="font-sans text-sm text-neutral-600 hover:text-neutral-900 underline decoration-transparent hover:decoration-current transition-all" href="/contact">Contact</a>
+<a class="font-sans text-sm text-neutral-600 hover:text-neutral-900 underline decoration-transparent hover:decoration-current transition-all" href="/blog">Blog</a>
+</div>
+<div class="flex flex-col gap-2">
+<span class="font-sans text-xs font-medium uppercase tracking-widest text-outline mb-1">Legal</span>
+<a class="font-sans text-sm text-neutral-600 hover:text-neutral-900 underline decoration-transparent hover:decoration-current transition-all" href="/terms">Terms of Service</a>
+<a class="font-sans text-sm text-neutral-600 hover:text-neutral-900 underline decoration-transparent hover:decoration-current transition-all" href="/consumer-terms">Consumer Terms</a>
+<a class="font-sans text-sm text-neutral-600 hover:text-neutral-900 underline decoration-transparent hover:decoration-current transition-all" href="/privacy">Privacy Policy</a>
+<a class="font-sans text-sm text-neutral-600 hover:text-neutral-900 underline decoration-transparent hover:decoration-current transition-all" href="/merchant-agreement">Merchant Agreement</a>
+<a class="font-sans text-sm text-neutral-600 hover:text-neutral-900 underline decoration-transparent hover:decoration-current transition-all" href="/complaints">Complaints</a>
+<a class="font-sans text-sm text-neutral-600 hover:text-neutral-900 underline decoration-transparent hover:decoration-current transition-all" href="/open-banking">Open Banking</a>
+<a class="font-sans text-sm text-neutral-600 hover:text-neutral-900 underline decoration-transparent hover:decoration-current transition-all" href="/website-terms">Website Terms</a>
+</div>
+<div class="font-sans text-sm text-neutral-600">
+<p>&copy; 2026 tapara. All rights reserved.</p>
+<p class="mt-4 text-xs text-outline leading-relaxed">Tapara Limited (NZBN 9429053591470).</p>
+</div>
+</div>
+</footer>
+<!-- Mobile Bottom Nav -->
+<div class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-6 pb-6 pt-3 bg-white/80 backdrop-blur-xl border-t border-neutral-100 shadow-[0_-12px_40px_rgba(10,10,10,0.04)] rounded-t-3xl">
+<a href="/" class="flex flex-col items-center justify-center text-neutral-400 hover:text-neutral-900">
+<span class="material-symbols-outlined text-[20px]">home</span>
+<span class="font-sans text-[8px] font-medium uppercase tracking-wide">Home</span>
+</a>
+<a href="/consumers" class="flex flex-col items-center justify-center text-neutral-400 hover:text-neutral-900">
+<span class="material-symbols-outlined text-[20px]">person</span>
+<span class="font-sans text-[8px] font-medium uppercase tracking-wide">Consumers</span>
+</a>
+<a href="/businesses" class="flex flex-col items-center justify-center text-neutral-400 hover:text-neutral-900">
+<span class="material-symbols-outlined text-[20px]">storefront</span>
+<span class="font-sans text-[8px] font-medium uppercase tracking-wide">Businesses</span>
+</a>
+<a href="/contact" class="flex flex-col items-center justify-center text-neutral-400 hover:text-neutral-900">
+<span class="material-symbols-outlined text-[20px]">mail</span>
+<span class="font-sans text-[8px] font-medium uppercase tracking-wide">Contact</span>
+</a>
+</div>
+<script src="../assets/js/router.js"></script>
+</body>
+</html>
