@@ -230,12 +230,23 @@ We couldn&rsquo;t find a payment to check. The link may be invalid.
           return;
         }
 
-        if (tx === 'failed' || tx === 'declined' || tx === 'cancelled' || tx === 'expired') {
+        if (tx === 'declined') {
           clearInterval(pollTimer);
-          var msg = document.getElementById('failed-message');
-          if (tx === 'declined') msg.textContent = 'Your payment was declined by the bank.';
-          else if (tx === 'cancelled') msg.textContent = 'The payment was cancelled.';
-          else msg.textContent = 'Something went wrong with the payment.';
+          document.getElementById('failed-message').textContent = 'Your bank declined the payment. No money has left your account.';
+          showState('failed');
+          return;
+        }
+
+        if (tx === 'cancelled') {
+          clearInterval(pollTimer);
+          document.getElementById('failed-message').textContent = 'Your payment was cancelled.';
+          showState('failed');
+          return;
+        }
+
+        if (tx === 'failed' || tx === 'expired') {
+          clearInterval(pollTimer);
+          document.getElementById('failed-message').textContent = 'Something went wrong with your payment.';
           showState('failed');
           return;
         }

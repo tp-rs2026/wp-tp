@@ -69,10 +69,70 @@ Your payment is being processed by the bank. You can close this page.
 </p>
 </div>
 
-<!-- State: Unavailable (declined/cancelled/expired/error) -->
-<div id="state-unavailable" class="hidden text-center">
+<!-- State: Retry after bank decline -->
+<div id="state-retry-declined" class="hidden text-center">
+<div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-8">
+<span class="material-symbols-outlined text-primary text-4xl">credit_card_off</span>
+</div>
+<h1 class="font-serif text-3xl font-bold text-primary mb-4">Payment declined</h1>
+<p class="text-lg text-on-surface-variant leading-relaxed mb-2">
+Your bank declined the payment. No money has left your account.
+</p>
+<p class="text-sm text-on-surface-variant leading-relaxed mb-8">
+<strong id="retry-declined-total"></strong> to <strong id="retry-declined-business"></strong>
+</p>
+<button id="retry-declined-button"
+class="w-full max-w-xs bg-primary text-white py-4 rounded-full font-sans font-medium text-lg hover:opacity-90 transition-opacity"
+type="button">
+Try again
+</button>
+<p id="retry-declined-error" class="hidden text-center text-sm text-red-600 mt-4"></p>
+</div>
+
+<!-- State: Retry after processing error -->
+<div id="state-retry-error" class="hidden text-center">
 <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-8">
 <span class="material-symbols-outlined text-primary text-4xl">error</span>
+</div>
+<h1 class="font-serif text-3xl font-bold text-primary mb-4">Something went wrong</h1>
+<p class="text-lg text-on-surface-variant leading-relaxed mb-2">
+Something went wrong with your payment. No money has left your account.
+</p>
+<p class="text-sm text-on-surface-variant leading-relaxed mb-8">
+<strong id="retry-error-total"></strong> to <strong id="retry-error-business"></strong>
+</p>
+<button id="retry-error-button"
+class="w-full max-w-xs bg-primary text-white py-4 rounded-full font-sans font-medium text-lg hover:opacity-90 transition-opacity"
+type="button">
+Try again
+</button>
+<p id="retry-error-error" class="hidden text-center text-sm text-red-600 mt-4"></p>
+</div>
+
+<!-- State: Retry after cancellation -->
+<div id="state-retry-cancelled" class="hidden text-center">
+<div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-8">
+<span class="material-symbols-outlined text-primary text-4xl">cancel</span>
+</div>
+<h1 class="font-serif text-3xl font-bold text-primary mb-4">Payment cancelled</h1>
+<p class="text-lg text-on-surface-variant leading-relaxed mb-2">
+Your payment was cancelled.
+</p>
+<p class="text-sm text-on-surface-variant leading-relaxed mb-8">
+<strong id="retry-cancelled-total"></strong> to <strong id="retry-cancelled-business"></strong>
+</p>
+<button id="retry-cancelled-button"
+class="w-full max-w-xs bg-primary text-white py-4 rounded-full font-sans font-medium text-lg hover:opacity-90 transition-opacity"
+type="button">
+Try again
+</button>
+<p id="retry-cancelled-error" class="hidden text-center text-sm text-red-600 mt-4"></p>
+</div>
+
+<!-- State: Unavailable (PR-level: declined/cancelled/expired) -->
+<div id="state-unavailable" class="hidden text-center">
+<div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-8">
+<span class="material-symbols-outlined text-primary text-4xl">block</span>
 </div>
 <h1 class="font-serif text-3xl font-bold text-primary mb-4">Payment unavailable</h1>
 <p id="unavailable-message" class="text-lg text-on-surface-variant leading-relaxed">
@@ -136,7 +196,7 @@ Retry
   }
 
   function showState(name) {
-    ['loading', 'pending', 'in-progress', 'approved', 'unavailable', 'not-found', 'rate-limited', 'error'].forEach(function (s) {
+    ['loading', 'pending', 'in-progress', 'retry-declined', 'retry-error', 'retry-cancelled', 'approved', 'unavailable', 'not-found', 'rate-limited', 'error'].forEach(function (s) {
       var el = document.getElementById('state-' + s);
       if (el) el.classList.toggle('hidden', s !== name);
     });
@@ -159,24 +219,20 @@ Retry
         if (!data) return;
         var tx = data.transactionStatus;
 
-        // TX succeeded
         if (tx === 'sent') { renderApproved(data); return; }
-
-        // TX in-flight — don't show Pay button
         if (tx === 'ready' || tx === 'authorised' || tx === 'submitted') { showState('in-progress'); return; }
-
-        // PR-level terminal states (no TX, or PR was cancelled/expired/declined before payment)
         if (data.status === 'declined' || data.status === 'cancelled' || data.status === 'expired') { renderUnavailable(data); return; }
-
-        // PR is pending: either fresh order (tx null) or last TX failed — show Pay button
-        renderPending(data);
+        if (tx === 'declined') { renderRetry('declined', data); return; }
+        if (tx === 'cancelled') { renderRetry('cancelled', data); return; }
+        if (tx === 'failed' || tx === 'expired') { renderRetry('error', data); return; }
+        renderFreshOrder(data);
       })
       .catch(function () {
         showState('error');
       });
   }
 
-  function renderPending(data) {
+  function renderFreshOrder(data) {
     document.getElementById('business-name').textContent = data.businessName;
 
     var itemsList = document.getElementById('items-list');
@@ -219,6 +275,18 @@ Retry
     showState('pending');
   }
 
+  // type: 'declined' | 'error' | 'cancelled'
+  function renderRetry(type, data) {
+    var prefix = 'retry-' + type;
+    document.getElementById(prefix + '-total').textContent = formatCurrency(data.total);
+    document.getElementById(prefix + '-business').textContent = data.businessName;
+
+    var btn = document.getElementById(prefix + '-button');
+    btn.onclick = function () { initiatePayment(prefix); };
+
+    showState(prefix);
+  }
+
   function renderApproved(data) {
     document.getElementById('approved-business').textContent = data.businessName;
     showState('approved');
@@ -226,16 +294,19 @@ Retry
 
   function renderUnavailable(data) {
     var msg = document.getElementById('unavailable-message');
-    if (data.status === 'expired') msg.textContent = 'This payment request has expired.';
-    else if (data.status === 'cancelled') msg.textContent = 'This payment was cancelled.';
-    else if (data.status === 'declined') msg.textContent = 'This payment was declined.';
+    if (data.status === 'expired') msg.textContent = 'This order has expired.';
+    else if (data.status === 'cancelled') msg.textContent = 'This order was cancelled by the merchant.';
+    else if (data.status === 'declined') msg.textContent = 'This payment request was declined.';
     else msg.textContent = 'This payment request is no longer available.';
     showState('unavailable');
   }
 
-  function initiatePayment() {
-    var btn = document.getElementById('pay-button');
-    var errEl = document.getElementById('pay-error');
+  var activeButtonPrefix = null;
+
+  function initiatePayment(retryPrefix) {
+    activeButtonPrefix = retryPrefix || null;
+    var btn = document.getElementById(retryPrefix ? retryPrefix + '-button' : 'pay-button');
+    var errEl = document.getElementById(retryPrefix ? retryPrefix + '-error' : 'pay-error');
     btn.disabled = true;
     btn.textContent = 'Connecting to bank\u2026';
     btn.classList.add('opacity-60', 'cursor-not-allowed');
@@ -298,17 +369,17 @@ Retry
   }
 
   function showPayError(message) {
-    var errEl = document.getElementById('pay-error');
+    var errEl = document.getElementById(activeButtonPrefix ? activeButtonPrefix + '-error' : 'pay-error');
     errEl.textContent = message;
     errEl.classList.remove('hidden');
     resetPayButton();
   }
 
   function resetPayButton() {
-    var btn = document.getElementById('pay-button');
+    var btn = document.getElementById(activeButtonPrefix ? activeButtonPrefix + '-button' : 'pay-button');
     btn.disabled = false;
     btn.classList.remove('opacity-60', 'cursor-not-allowed');
-    btn.textContent = 'Pay';
+    btn.textContent = activeButtonPrefix ? 'Try again' : 'Pay';
   }
 
   fetchOrder();
