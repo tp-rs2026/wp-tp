@@ -132,7 +132,9 @@ We couldn&rsquo;t find a payment to check. The link may be invalid.
       .then(function (data) {
         if (!data) return;
 
-        if (data.status === 'approved') {
+        var tx = data.transactionStatus;
+
+        if (tx === 'sent') {
           clearInterval(pollTimer);
           document.getElementById('success-total').textContent = formatCurrency(data.total);
           document.getElementById('success-business').textContent = data.businessName;
@@ -140,13 +142,14 @@ We couldn&rsquo;t find a payment to check. The link may be invalid.
           return;
         }
 
-        if (data.status === 'declined' || data.status === 'cancelled' || data.status === 'error' || data.status === 'expired') {
+        if (tx === 'failed' || tx === 'declined' || tx === 'cancelled' || tx === 'expired') {
           clearInterval(pollTimer);
           document.getElementById('failed-message').textContent = 'The payment was cancelled or could not be processed.';
           showState('failed');
           return;
         }
 
+        // Still processing (tx is null, ready, authorised, or submitted)
         pollCount++;
         if (pollCount >= MAX_POLLS) {
           clearInterval(pollTimer);

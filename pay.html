@@ -60,6 +60,15 @@ Your payment to <strong id="approved-business"></strong> has been confirmed.
 </p>
 </div>
 
+<!-- State: In Progress (TX in-flight) -->
+<div id="state-in-progress" class="hidden text-center">
+<div class="w-10 h-10 border-2 border-outline-variant border-t-primary rounded-full animate-spin mx-auto mb-6"></div>
+<h1 class="font-serif text-3xl font-bold text-primary mb-4">Payment in progress</h1>
+<p class="text-lg text-on-surface-variant leading-relaxed">
+Your payment is being processed by the bank. You can close this page.
+</p>
+</div>
+
 <!-- State: Unavailable (declined/cancelled/expired/error) -->
 <div id="state-unavailable" class="hidden text-center">
 <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-8">
@@ -127,7 +136,7 @@ Retry
   }
 
   function showState(name) {
-    ['loading', 'pending', 'approved', 'unavailable', 'not-found', 'rate-limited', 'error'].forEach(function (s) {
+    ['loading', 'pending', 'in-progress', 'approved', 'unavailable', 'not-found', 'rate-limited', 'error'].forEach(function (s) {
       var el = document.getElementById('state-' + s);
       if (el) el.classList.toggle('hidden', s !== name);
     });
@@ -148,9 +157,19 @@ Retry
       })
       .then(function (data) {
         if (!data) return;
-        if (data.status === 'pending') renderPending(data);
-        else if (data.status === 'approved') renderApproved(data);
-        else renderUnavailable(data);
+        var tx = data.transactionStatus;
+
+        // TX succeeded
+        if (tx === 'sent') { renderApproved(data); return; }
+
+        // TX in-flight — don't show Pay button
+        if (tx === 'ready' || tx === 'authorised' || tx === 'submitted') { showState('in-progress'); return; }
+
+        // PR-level terminal states (no TX, or PR was cancelled/expired/declined before payment)
+        if (data.status === 'declined' || data.status === 'cancelled' || data.status === 'expired') { renderUnavailable(data); return; }
+
+        // PR is pending: either fresh order (tx null) or last TX failed — show Pay button
+        renderPending(data);
       })
       .catch(function () {
         showState('error');
@@ -245,9 +264,12 @@ Retry
           return;
         }
 
-        if (err.status === 409 && err.code === 'already_resolved') {
-          fetchOrder();
-          return;
+        if (err.status === 409) {
+          if (err.code === 'already_resolved') { fetchOrder(); return; }
+          if (err.code === 'payment_in_progress' || err.code === 'payment_being_processed') {
+            showPayError('A payment is already being processed. Please wait.');
+            return;
+          }
         }
 
         if (err.status === 429) {
