@@ -70,63 +70,93 @@ Your payment is being processed by the bank. You can close this page.
 </div>
 
 <!-- State: Retry after bank decline -->
-<div id="state-retry-declined" class="hidden text-center">
+<div id="state-retry-declined" class="hidden">
+<div class="text-center mb-8">
 <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-8">
 <span class="material-symbols-outlined text-primary text-4xl">credit_card_off</span>
 </div>
 <h1 class="font-serif text-3xl font-bold text-primary mb-4">Payment declined</h1>
-<p class="text-lg text-on-surface-variant leading-relaxed mb-2">
+<p class="text-lg text-on-surface-variant leading-relaxed">
 Your bank declined the payment. No money has left your account.
 </p>
-<p class="text-sm text-on-surface-variant leading-relaxed mb-8">
-<strong id="retry-declined-total"></strong> to <strong id="retry-declined-business"></strong>
-</p>
+</div>
+<p id="retry-declined-business" class="font-serif text-2xl font-bold text-center mb-8"></p>
+<div class="bg-white border border-outline-variant rounded-3xl p-6 mb-6">
+<div id="retry-declined-items" class="space-y-3"></div>
+<div class="border-t border-outline-variant mt-4 pt-4 flex justify-between items-center">
+<span class="font-sans font-medium text-on-surface">Total</span>
+<span id="retry-declined-total" class="font-serif text-2xl font-bold text-primary"></span>
+</div>
+</div>
 <button id="retry-declined-button"
-class="w-full max-w-xs bg-primary text-white py-4 rounded-full font-sans font-medium text-lg hover:opacity-90 transition-opacity"
+class="w-full bg-primary text-white py-4 rounded-full font-sans font-medium text-lg hover:opacity-90 transition-opacity"
 type="button">
 Try again
 </button>
 <p id="retry-declined-error" class="hidden text-center text-sm text-red-600 mt-4"></p>
+<p class="text-xs text-outline text-center mt-6 leading-relaxed">
+You&rsquo;ll be redirected to your bank to authorise this payment.
+</p>
 </div>
 
 <!-- State: Retry after processing error -->
-<div id="state-retry-error" class="hidden text-center">
+<div id="state-retry-error" class="hidden">
+<div class="text-center mb-8">
 <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-8">
 <span class="material-symbols-outlined text-primary text-4xl">error</span>
 </div>
 <h1 class="font-serif text-3xl font-bold text-primary mb-4">Something went wrong</h1>
-<p class="text-lg text-on-surface-variant leading-relaxed mb-2">
+<p class="text-lg text-on-surface-variant leading-relaxed">
 Something went wrong with your payment. No money has left your account.
 </p>
-<p class="text-sm text-on-surface-variant leading-relaxed mb-8">
-<strong id="retry-error-total"></strong> to <strong id="retry-error-business"></strong>
-</p>
+</div>
+<p id="retry-error-business" class="font-serif text-2xl font-bold text-center mb-8"></p>
+<div class="bg-white border border-outline-variant rounded-3xl p-6 mb-6">
+<div id="retry-error-items" class="space-y-3"></div>
+<div class="border-t border-outline-variant mt-4 pt-4 flex justify-between items-center">
+<span class="font-sans font-medium text-on-surface">Total</span>
+<span id="retry-error-total" class="font-serif text-2xl font-bold text-primary"></span>
+</div>
+</div>
 <button id="retry-error-button"
-class="w-full max-w-xs bg-primary text-white py-4 rounded-full font-sans font-medium text-lg hover:opacity-90 transition-opacity"
+class="w-full bg-primary text-white py-4 rounded-full font-sans font-medium text-lg hover:opacity-90 transition-opacity"
 type="button">
 Try again
 </button>
 <p id="retry-error-error" class="hidden text-center text-sm text-red-600 mt-4"></p>
+<p class="text-xs text-outline text-center mt-6 leading-relaxed">
+You&rsquo;ll be redirected to your bank to authorise this payment.
+</p>
 </div>
 
 <!-- State: Retry after cancellation -->
-<div id="state-retry-cancelled" class="hidden text-center">
+<div id="state-retry-cancelled" class="hidden">
+<div class="text-center mb-8">
 <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-8">
 <span class="material-symbols-outlined text-primary text-4xl">cancel</span>
 </div>
 <h1 class="font-serif text-3xl font-bold text-primary mb-4">Payment cancelled</h1>
-<p class="text-lg text-on-surface-variant leading-relaxed mb-2">
+<p class="text-lg text-on-surface-variant leading-relaxed">
 Your payment was cancelled.
 </p>
-<p class="text-sm text-on-surface-variant leading-relaxed mb-8">
-<strong id="retry-cancelled-total"></strong> to <strong id="retry-cancelled-business"></strong>
-</p>
+</div>
+<p id="retry-cancelled-business" class="font-serif text-2xl font-bold text-center mb-8"></p>
+<div class="bg-white border border-outline-variant rounded-3xl p-6 mb-6">
+<div id="retry-cancelled-items" class="space-y-3"></div>
+<div class="border-t border-outline-variant mt-4 pt-4 flex justify-between items-center">
+<span class="font-sans font-medium text-on-surface">Total</span>
+<span id="retry-cancelled-total" class="font-serif text-2xl font-bold text-primary"></span>
+</div>
+</div>
 <button id="retry-cancelled-button"
-class="w-full max-w-xs bg-primary text-white py-4 rounded-full font-sans font-medium text-lg hover:opacity-90 transition-opacity"
+class="w-full bg-primary text-white py-4 rounded-full font-sans font-medium text-lg hover:opacity-90 transition-opacity"
 type="button">
 Try again
 </button>
 <p id="retry-cancelled-error" class="hidden text-center text-sm text-red-600 mt-4"></p>
+<p class="text-xs text-outline text-center mt-6 leading-relaxed">
+You&rsquo;ll be redirected to your bank to authorise this payment.
+</p>
 </div>
 
 <!-- State: Unavailable (PR-level: declined/cancelled/expired) -->
@@ -232,12 +262,9 @@ Retry
       });
   }
 
-  function renderFreshOrder(data) {
-    document.getElementById('business-name').textContent = data.businessName;
-
-    var itemsList = document.getElementById('items-list');
-    itemsList.innerHTML = '';
-    (data.items || []).forEach(function (item) {
+  function buildItemsList(containerEl, items) {
+    containerEl.innerHTML = '';
+    (items || []).forEach(function (item) {
       var row = document.createElement('div');
       row.className = 'flex justify-between items-baseline';
 
@@ -264,9 +291,13 @@ Retry
 
       row.appendChild(nameEl);
       row.appendChild(priceEl);
-      itemsList.appendChild(row);
+      containerEl.appendChild(row);
     });
+  }
 
+  function renderFreshOrder(data) {
+    document.getElementById('business-name').textContent = data.businessName;
+    buildItemsList(document.getElementById('items-list'), data.items);
     document.getElementById('order-total').textContent = formatCurrency(data.total);
 
     var btn = document.getElementById('pay-button');
@@ -278,8 +309,9 @@ Retry
   // type: 'declined' | 'error' | 'cancelled'
   function renderRetry(type, data) {
     var prefix = 'retry-' + type;
-    document.getElementById(prefix + '-total').textContent = formatCurrency(data.total);
     document.getElementById(prefix + '-business').textContent = data.businessName;
+    buildItemsList(document.getElementById(prefix + '-items'), data.items);
+    document.getElementById(prefix + '-total').textContent = formatCurrency(data.total);
 
     var btn = document.getElementById(prefix + '-button');
     btn.onclick = function () { initiatePayment(prefix); };
