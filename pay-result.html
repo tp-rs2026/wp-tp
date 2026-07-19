@@ -50,18 +50,34 @@ Download tapara to track your purchases and earn loyalty rewards.
 </div>
 </div>
 
-<!-- State: Failed -->
-<div id="state-failed" class="hidden text-center">
+<!-- State: Failed (with order summary and inline retry) -->
+<div id="state-failed" class="hidden">
+<div class="text-center mb-8">
 <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-8">
 <span class="material-symbols-outlined text-primary text-4xl">error</span>
 </div>
 <h1 class="font-serif text-3xl font-bold text-primary mb-4">Payment not completed</h1>
-<p id="failed-message" class="text-lg text-on-surface-variant leading-relaxed mb-8">
+<p id="failed-message" class="text-lg text-on-surface-variant leading-relaxed">
 Your payment could not be completed.
 </p>
-<a id="retry-link" href="/" class="inline-block bg-primary text-white px-8 py-4 rounded-full font-sans font-medium hover:opacity-90 transition-opacity">
+</div>
+<p id="failed-business" class="font-serif text-2xl font-bold text-center mb-8"></p>
+<div class="bg-white border border-outline-variant rounded-3xl p-6 mb-6">
+<div id="failed-items" class="space-y-3"></div>
+<div class="border-t border-outline-variant mt-4 pt-4 flex justify-between items-center">
+<span class="font-sans font-medium text-on-surface">Total</span>
+<span id="failed-total" class="font-serif text-2xl font-bold text-primary"></span>
+</div>
+</div>
+<button id="retry-button"
+class="w-full bg-primary text-white py-4 rounded-full font-sans font-medium text-lg hover:opacity-90 transition-opacity"
+type="button">
 Try again
-</a>
+</button>
+<p id="retry-error" class="hidden text-center text-sm text-red-600 mt-4"></p>
+<p class="text-xs text-outline text-center mt-6 leading-relaxed">
+You&rsquo;ll be redirected to your bank to authorise this payment.
+</p>
 </div>
 
 <!-- State: Timeout -->
@@ -105,9 +121,6 @@ We couldn&rsquo;t find a payment to check. The link may be invalid.
     return;
   }
 
-  var retryLink = document.getElementById('retry-link');
-  if (retryLink) retryLink.href = '/pay/' + requestId;
-
   function showState(name) {
     ['polling', 'success', 'failed', 'timeout', 'no-id'].forEach(function (s) {
       var el = document.getElementById('state-' + s);
@@ -117,6 +130,135 @@ We couldn&rsquo;t find a payment to check. The link may be invalid.
 
   function formatCurrency(val) {
     return '$' + Number(val).toFixed(2);
+  }
+
+  function buildItemsList(containerEl, items) {
+    containerEl.innerHTML = '';
+    (items || []).forEach(function (item) {
+      var row = document.createElement('div');
+      row.className = 'flex justify-between items-baseline';
+
+      var nameEl;
+      if (item.quantity && item.quantity > 1) {
+        nameEl = document.createElement('div');
+        var nameSpan = document.createElement('span');
+        nameSpan.className = 'text-on-surface-variant';
+        nameSpan.textContent = item.name;
+        var qtySpan = document.createElement('span');
+        qtySpan.className = 'text-outline text-sm ml-1';
+        qtySpan.textContent = '\u00D7 ' + item.quantity;
+        nameEl.appendChild(nameSpan);
+        nameEl.appendChild(qtySpan);
+      } else {
+        nameEl = document.createElement('span');
+        nameEl.className = 'text-on-surface-variant';
+        nameEl.textContent = item.name;
+      }
+
+      var priceEl = document.createElement('span');
+      priceEl.className = 'text-on-surface font-medium';
+      priceEl.textContent = formatCurrency(item.price);
+
+      row.appendChild(nameEl);
+      row.appendChild(priceEl);
+      containerEl.appendChild(row);
+    });
+  }
+
+  function showFailed(message, data) {
+    document.getElementById('failed-message').textContent = message;
+    document.getElementById('failed-business').textContent = data.businessName;
+    buildItemsList(document.getElementById('failed-items'), data.items);
+    document.getElementById('failed-total').textContent = formatCurrency(data.total);
+
+    var btn = document.getElementById('retry-button');
+    btn.onclick = function () { initiatePayment(); };
+
+    showState('failed');
+  }
+
+  function initiatePayment() {
+    var btn = document.getElementById('retry-button');
+    var errEl = document.getElementById('retry-error');
+    btn.disabled = true;
+    btn.textContent = 'Connecting to bank\u2026';
+    btn.classList.add('opacity-60', 'cursor-not-allowed');
+    errEl.classList.add('hidden');
+
+    fetch(API_BASE + '/payment-requests/' + requestId + '/approve-guest', {
+      method: 'POST'
+    })
+      .then(function (res) {
+        if (res.ok) return res.json();
+        return res.json().then(function (body) {
+          var err = new Error(body.error || 'unknown');
+          err.status = res.status;
+          err.code = body.error;
+          throw err;
+        });
+      })
+      .then(function (data) {
+        if (data.authorisationUrl) {
+          window.location.href = data.authorisationUrl;
+        }
+      })
+      .catch(function (err) {
+        if (!err || !err.status) {
+          showRetryError('Something went wrong. Please try again.');
+          return;
+        }
+
+        if (err.status === 409) {
+          if (err.code === 'already_resolved') {
+            pollCount = 0;
+            showState('polling');
+            pollStatus();
+            pollTimer = setInterval(pollStatus, POLL_INTERVAL);
+            return;
+          }
+          if (err.code === 'payment_in_progress' || err.code === 'payment_being_processed') {
+            showRetryError('A payment is already being processed. Please wait.');
+            return;
+          }
+        }
+
+        if (err.status === 429) {
+          showRetryError('Too many requests. Please wait a moment and try again.');
+          return;
+        }
+
+        if (err.status === 422) {
+          if (err.code === 'no_payout_account' || err.code === 'payout_account_not_active') {
+            showRetryError('This business can\u2019t accept bank payments right now.');
+          } else if (err.code === 'invalid_amount' || err.code === 'amount_exceeds_limit') {
+            showRetryError('The payment amount is invalid.');
+          } else {
+            showRetryError('Something went wrong. Please try again.');
+          }
+          return;
+        }
+
+        if (err.status === 502 && err.code === 'payment_initiation_failed') {
+          showRetryError('Could not connect to the bank. Please try again.');
+          return;
+        }
+
+        showRetryError('Something went wrong. Please try again.');
+      });
+  }
+
+  function showRetryError(message) {
+    var errEl = document.getElementById('retry-error');
+    errEl.textContent = message;
+    errEl.classList.remove('hidden');
+    resetRetryButton();
+  }
+
+  function resetRetryButton() {
+    var btn = document.getElementById('retry-button');
+    btn.disabled = false;
+    btn.classList.remove('opacity-60', 'cursor-not-allowed');
+    btn.textContent = 'Try again';
   }
 
   function pollStatus() {
@@ -144,29 +286,25 @@ We couldn&rsquo;t find a payment to check. The link may be invalid.
 
         if (tx === 'declined') {
           clearInterval(pollTimer);
-          document.getElementById('failed-message').textContent = 'Your bank declined the payment. No money has left your account.';
-          showState('failed');
+          showFailed('Your bank declined the payment. No money has left your account.', data);
           return;
         }
 
         if (tx === 'cancelled') {
           clearInterval(pollTimer);
-          document.getElementById('failed-message').textContent = 'Your payment was cancelled.';
-          showState('failed');
+          showFailed('Your payment was cancelled.', data);
           return;
         }
 
         if (tx === 'abandoned') {
           clearInterval(pollTimer);
-          document.getElementById('failed-message').textContent = 'You exited the bank payment page. No money has left your account.';
-          showState('failed');
+          showFailed('You exited the bank payment page. No money has left your account.', data);
           return;
         }
 
         if (tx === 'failed' || tx === 'expired') {
           clearInterval(pollTimer);
-          document.getElementById('failed-message').textContent = 'Something went wrong with your payment.';
-          showState('failed');
+          showFailed('Something went wrong with your payment.', data);
           return;
         }
 
