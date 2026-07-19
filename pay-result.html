@@ -156,6 +156,13 @@ We couldn&rsquo;t find a payment to check. The link may be invalid.
           return;
         }
 
+        if (tx === 'abandoned') {
+          clearInterval(pollTimer);
+          document.getElementById('failed-message').textContent = 'You exited the bank payment page. No money has left your account.';
+          showState('failed');
+          return;
+        }
+
         if (tx === 'failed' || tx === 'expired') {
           clearInterval(pollTimer);
           document.getElementById('failed-message').textContent = 'Something went wrong with your payment.';
