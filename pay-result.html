@@ -80,6 +80,17 @@ You&rsquo;ll be redirected to authorise this payment.
 </p>
 </div>
 
+<!-- State: Unavailable (PR closed — no retry) -->
+<div id="state-unavailable" class="hidden text-center">
+<div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-8">
+<span class="material-symbols-outlined text-primary text-4xl">block</span>
+</div>
+<h1 class="font-serif text-3xl font-bold text-primary mb-4">Order cancelled</h1>
+<p id="unavailable-message" class="text-lg text-on-surface-variant leading-relaxed">
+This order was cancelled by the merchant. No money has left your account.
+</p>
+</div>
+
 <!-- State: Timeout -->
 <div id="state-timeout" class="hidden text-center">
 <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-8">
@@ -122,7 +133,7 @@ We couldn&rsquo;t find a payment to check. The link may be invalid.
   }
 
   function showState(name) {
-    ['polling', 'success', 'failed', 'timeout', 'no-id'].forEach(function (s) {
+    ['polling', 'success', 'failed', 'unavailable', 'timeout', 'no-id'].forEach(function (s) {
       var el = document.getElementById('state-' + s);
       if (el) el.classList.toggle('hidden', s !== name);
     });
@@ -261,6 +272,14 @@ We couldn&rsquo;t find a payment to check. The link may be invalid.
     btn.textContent = 'Try again';
   }
 
+  function showUnavailable(data) {
+    var msg = document.getElementById('unavailable-message');
+    if (data.status === 'expired') msg.textContent = 'This order has expired.';
+    else if (data.status === 'declined') msg.textContent = 'This payment request was declined.';
+    else msg.textContent = 'This order was cancelled by the merchant. No money has left your account.';
+    showState('unavailable');
+  }
+
   function pollStatus() {
     fetch(API_BASE + '/payment-requests/' + requestId + '/guest')
       .then(function (res) {
@@ -275,6 +294,13 @@ We couldn&rsquo;t find a payment to check. The link may be invalid.
         if (!data) return;
 
         var tx = data.transactionStatus;
+
+        // PR-level closure — no retry possible
+        if (data.status === 'cancelled' || data.status === 'declined' || data.status === 'expired') {
+          clearInterval(pollTimer);
+          showUnavailable(data);
+          return;
+        }
 
         if (tx === 'sent') {
           clearInterval(pollTimer);
