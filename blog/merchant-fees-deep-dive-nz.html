@@ -113,8 +113,11 @@ Get the app
 
 <h2 class="font-headline text-2xl font-bold text-primary">EFTPOS insert vs contactless tap &mdash; the fee most merchants miss</h2>
 <p class="text-lg text-on-surface-variant leading-relaxed">This is one of the most misunderstood costs in NZ payments. When a customer inserts or swipes their debit card and selects &ldquo;Cheque&rdquo; or &ldquo;Savings,&rdquo; the transaction goes through the domestic EFTPOS network. No interchange fee. No scheme fee. The merchant pays nothing per transaction &mdash; only the fixed monthly terminal costs.</p>
-<p class="text-lg text-on-surface-variant leading-relaxed">When the same customer taps the same card, the transaction routes through the Visa or Mastercard network instead of the domestic EFTPOS network. That triggers interchange (0.20%), scheme fees, and your acquirer&rsquo;s margin. Total cost: roughly 0.6&ndash;0.7% of the transaction value.</p>
-<p class="text-lg text-on-surface-variant leading-relaxed">Same card. Same bank account. Same money. But a tap costs you 60&ndash;70 cents on a $100 transaction, while an insert costs you nothing. Most customers have no idea, and most merchants have never looked closely enough at their statements to notice.</p>
+<p class="text-lg text-on-surface-variant leading-relaxed">When the same customer taps the same card, the transaction routes through the Visa or Mastercard network instead of the domestic EFTPOS network. That triggers interchange (0.20%), scheme fees, and your acquirer&rsquo;s margin. On interchange-plus pricing, that adds up to roughly 0.65% of the transaction value. On a blended rate, it could be anywhere from 1.0% to 2.5%.</p>
+<p class="text-lg text-on-surface-variant leading-relaxed">Same card. Same bank account. Same money. But a tap costs you anywhere from 65 cents to $2.50 on a $100 transaction, while an insert costs you nothing. Most customers have no idea, and most merchants have never looked closely enough at their statements to notice.</p>
+<div class="dc-visual my-8 rounded-2xl overflow-hidden border border-outline-variant">
+<iframe scrolling="no" src="assets/Insert vs Tap - Same Card Different Cost.dc.html" loading="lazy" data-height="700" title="Insert vs Tap — same card, different cost"></iframe>
+</div>
 
 <h2 class="font-headline text-2xl font-bold text-primary">What each card type costs you</h2>
 <p class="text-lg text-on-surface-variant leading-relaxed">Here is what a typical NZ merchant pays on a $100 transaction, including interchange, scheme fees, and acquirer margin:</p>
@@ -243,6 +246,9 @@ Get the app
 <p class="text-lg text-on-surface-variant leading-relaxed"><strong>Blended pricing</strong> gives you a single fixed percentage for all card transactions (or sometimes separate rates for debit and credit). It is simple and predictable. The downside is that lower-cost transactions (domestic debit at 0.20% interchange) subsidise higher-cost ones (foreign credit at 1.50% interchange). You pay the same rate regardless.</p>
 <p class="text-lg text-on-surface-variant leading-relaxed"><strong>Interchange-plus (IC+) pricing</strong> charges you the actual interchange fee for each transaction plus a fixed acquirer margin. Your monthly bill is less predictable because the interchange varies by card type, but you pay the true cost of each transaction. IC+ is usually cheaper overall, especially as your volume grows.</p>
 <p class="text-lg text-on-surface-variant leading-relaxed">This distinction matters more than usual right now. The December 2025 interchange cap reduction cut in-person credit interchange from 0.80% to 0.30%. On interchange-plus pricing, that saving flows directly to you. On blended pricing, your provider may or may not pass it through. If you are on a blended rate, it is worth calling your bank and asking whether your rate has been adjusted to reflect the new caps.</p>
+<div class="dc-visual my-8 rounded-2xl overflow-hidden border border-outline-variant">
+<iframe scrolling="no" src="assets/Blended vs Interchange-Plus.dc.html" loading="lazy" data-height="700" title="Blended vs Interchange-Plus — how the 2025 cap cut plays out"></iframe>
+</div>
 
 <h2 class="font-headline text-2xl font-bold text-primary">Payment processors and their published rates</h2>
 <p class="text-lg text-on-surface-variant leading-relaxed">Unlike the banks, some processors publish their pricing. Here is what the main players charge in New Zealand.</p>

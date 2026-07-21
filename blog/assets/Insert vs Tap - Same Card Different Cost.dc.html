@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/tapara-design-system-074ae7c6-13c9-470b-b3fa-c71ecdaeb0c9/colors_and_type.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+</helmet>
+<div style="width:1200px;height:700px;box-sizing:border-box;background:#FFFFFF;font-family:'Manrope',sans-serif;color:#0A0A0A;padding:44px 56px;display:flex;flex-direction:column;">
+
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:24px;">
+    <div style="display:flex;flex-direction:column;gap:5px;">
+      <span style="font-family:'Manrope';font-weight:500;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#888888;">Insert vs tap</span>
+      <h2 style="font-family:'Noto Serif';font-weight:700;font-size:29px;line-height:1.15;margin:0;">Same card. Same account. Different cost.</h2>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;padding:10px 16px;border:1px solid #E0E0DC;border-radius:999px;">
+      <span class="material-symbols-outlined" style="font-size:20px;color:#0A0A0A;">credit_card</span>
+      <span style="font-family:'Manrope';font-weight:500;font-size:13px;">One card, three outcomes</span>
+    </div>
+  </div>
+
+  <div style="flex:1;display:flex;gap:0;">
+
+    <!-- Insert -->
+    <div style="flex:1;display:flex;flex-direction:column;padding-right:26px;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+        <span class="material-symbols-outlined" style="font-size:22px;color:#0A0A0A;">sim_card</span>
+        <span style="font-family:'Noto Serif';font-weight:700;font-size:19px;">Insert — chip &amp; PIN</span>
+      </div>
+      <div style="border:1px solid #E0E0DC;border-radius:14px;padding:13px 16px;display:flex;align-items:center;gap:12px;">
+        <span class="material-symbols-outlined" style="font-size:20px;color:#888888;">route</span>
+        <div><div style="font-family:'Manrope';font-weight:500;font-size:15px;">Domestic EFTPOS network</div><div style="font-family:'Manrope';font-size:13px;color:#888888;">no scheme involved</div></div>
+      </div>
+      <div style="display:flex;justify-content:center;color:#E0E0DC;padding:6px 0;"><span class="material-symbols-outlined" style="font-size:22px;">arrow_downward</span></div>
+      <div style="display:flex;flex-direction:column;gap:7px;">
+        <div style="display:flex;justify-content:space-between;padding:11px 16px;background:#F5F5F3;border-radius:10px;"><span style="font-family:'Manrope';font-size:14px;">Interchange</span><span style="font-family:'Noto Serif';font-weight:700;font-size:15px;color:#1D9E75;">$0.00</span></div>
+        <div style="display:flex;justify-content:space-between;padding:11px 16px;background:#F5F5F3;border-radius:10px;"><span style="font-family:'Manrope';font-size:14px;">Scheme fee</span><span style="font-family:'Noto Serif';font-weight:700;font-size:15px;color:#1D9E75;">$0.00</span></div>
+      </div>
+      <div style="margin-top:auto;border:1px solid #1D9E75;border-radius:14px;padding:16px 18px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
+          <div style="font-family:'Manrope';font-size:13px;color:#888888;">$100 sale · merchant receives</div>
+          <span style="font-family:'Manrope';font-weight:500;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#1D9E75;">Zero cost</span>
+        </div>
+        <div style="font-family:'Noto Serif';font-weight:700;font-size:27px;margin-top:4px;">$100.00</div>
+      </div>
+    </div>
+
+    <div style="width:1px;background:#E0E0DC;"></div>
+
+    <!-- Tap IC+ -->
+    <div style="flex:1;display:flex;flex-direction:column;padding:0 26px;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+        <span class="material-symbols-outlined" style="font-size:22px;color:#0A0A0A;">contactless</span>
+        <span style="font-family:'Noto Serif';font-weight:700;font-size:19px;">Tap — IC+ pricing</span>
+      </div>
+      <div style="border:1px solid #E0E0DC;border-radius:14px;padding:13px 16px;display:flex;align-items:center;gap:12px;">
+        <span class="material-symbols-outlined" style="font-size:20px;color:#888888;">hub</span>
+        <div><div style="font-family:'Manrope';font-weight:500;font-size:15px;">Visa / Mastercard network</div><div style="font-family:'Manrope';font-size:13px;color:#888888;">routed through the card scheme</div></div>
+      </div>
+      <div style="display:flex;justify-content:center;color:#E0E0DC;padding:6px 0;"><span class="material-symbols-outlined" style="font-size:22px;">arrow_downward</span></div>
+      <div style="display:flex;flex-direction:column;gap:7px;">
+        <div style="display:flex;justify-content:space-between;padding:11px 16px;background:#F5F5F3;border-radius:10px;"><span style="font-family:'Manrope';font-size:14px;">Interchange · 0.20%</span><span style="font-family:'Noto Serif';font-weight:700;font-size:15px;color:#E24B4A;">−$0.20</span></div>
+        <div style="display:flex;justify-content:space-between;padding:11px 16px;background:#F5F5F3;border-radius:10px;"><span style="font-family:'Manrope';font-size:14px;">Scheme fee · ~0.05%</span><span style="font-family:'Noto Serif';font-weight:700;font-size:15px;color:#E24B4A;">−$0.05</span></div>
+        <div style="display:flex;justify-content:space-between;padding:11px 16px;background:#F5F5F3;border-radius:10px;"><span style="font-family:'Manrope';font-size:14px;">Acquirer margin · ~0.40%</span><span style="font-family:'Noto Serif';font-weight:700;font-size:15px;color:#E24B4A;">−$0.40</span></div>
+      </div>
+      <div style="margin-top:auto;background:#0A0A0A;border-radius:14px;padding:16px 18px;color:#FFFFFF;">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
+          <div style="font-family:'Manrope';font-size:13px;color:rgba(255,255,255,0.6);">$100 sale · merchant receives</div>
+          <span style="font-family:'Manrope';font-weight:500;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.6);white-space:nowrap;">MSF ~$0.65</span>
+        </div>
+        <div style="font-family:'Noto Serif';font-weight:700;font-size:27px;margin-top:4px;">~$99.35</div>
+      </div>
+    </div>
+
+    <div style="width:1px;background:#E0E0DC;"></div>
+
+    <!-- Tap blended -->
+    <div style="flex:1;display:flex;flex-direction:column;padding-left:26px;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+        <span class="material-symbols-outlined" style="font-size:22px;color:#0A0A0A;">contactless</span>
+        <span style="font-family:'Noto Serif';font-weight:700;font-size:19px;">Tap — blended pricing</span>
+      </div>
+      <div style="border:1px solid #E0E0DC;border-radius:14px;padding:13px 16px;display:flex;align-items:center;gap:12px;">
+        <span class="material-symbols-outlined" style="font-size:20px;color:#888888;">hub</span>
+        <div><div style="font-family:'Manrope';font-weight:500;font-size:15px;">Visa / Mastercard network</div><div style="font-family:'Manrope';font-size:13px;color:#888888;">routed through the card scheme</div></div>
+      </div>
+      <div style="display:flex;justify-content:center;color:#E0E0DC;padding:6px 0;"><span class="material-symbols-outlined" style="font-size:22px;">arrow_downward</span></div>
+      <div style="display:flex;justify-content:space-between;padding:11px 16px;background:#F5F5F3;border-radius:10px;"><span style="font-family:'Manrope';font-size:14px;">Blended MSF · 1.5%</span><span style="font-family:'Noto Serif';font-weight:700;font-size:15px;color:#E24B4A;white-space:nowrap;">−$1.50</span></div>
+      <div style="font-family:'Manrope';font-size:13px;color:#888888;margin-top:10px;line-height:1.45;">One fixed rate — interchange, scheme fees, and margin bundled together. Blended rates typically range 1.0 – 2.5%.</div>
+      <div style="margin-top:auto;background:#0A0A0A;border-radius:14px;padding:16px 18px;color:#FFFFFF;">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
+          <div style="font-family:'Manrope';font-size:13px;color:rgba(255,255,255,0.6);">$100 sale · merchant receives</div>
+          <span style="font-family:'Manrope';font-weight:500;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.6);white-space:nowrap;">MSF ~$1.50</span>
+        </div>
+        <div style="font-family:'Noto Serif';font-weight:700;font-size:27px;margin-top:4px;white-space:nowrap;">~$98.50</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:22px;padding:13px 20px;background:#F5F5F3;border-radius:12px;display:flex;align-items:center;gap:12px;">
+    <span class="material-symbols-outlined" style="font-size:20px;color:#888888;">info</span>
+    <span style="font-family:'Manrope';font-size:14px;">Every contactless tap routes through Visa or Mastercard — <span style="font-weight:500;">even on a debit card</span>.</span>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1200,&quot;height&quot;:700}}"></script>
+</body>
+</html>
