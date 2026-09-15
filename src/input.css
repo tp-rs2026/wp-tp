@@ -2,39 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Self-hosted fonts — eliminates FOUC from external Google Fonts */
-@font-face {
-    font-family: 'DM Sans';
-    font-style: normal;
-    font-weight: 400 700;
-    font-display: swap;
-    src: url('../fonts/dm-sans-regular.woff2') format('woff2');
-}
-
-@font-face {
-    font-family: 'DM Sans';
-    font-style: italic;
-    font-weight: 400;
-    font-display: swap;
-    src: url('../fonts/dm-sans-italic.woff2') format('woff2');
-}
-
-@font-face {
-    font-family: 'Playfair Display';
-    font-style: normal;
-    font-weight: 400 700;
-    font-display: swap;
-    src: url('../fonts/playfair-display-regular.woff2') format('woff2');
-}
-
-@font-face {
-    font-family: 'Playfair Display';
-    font-style: italic;
-    font-weight: 400;
-    font-display: swap;
-    src: url('../fonts/playfair-display-italic.woff') format('woff');
-}
-
+/* Self-hosted Material Symbols */
 @font-face {
     font-family: 'Material Symbols Outlined';
     font-style: normal;
@@ -60,19 +28,65 @@
     }
 }
 
-/* Background texture */
-.fern-overlay {
-    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5c-2 10-10 15-20 18 10 3 18 8 20 18 2-10 10-15 20-18-10-3-18-8-20-18z' fill='%230a0a0a' fill-opacity='0.04'/%3E%3C/svg%3E");
+/* Skip link for accessibility */
+.skip-link {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+.skip-link:focus {
+    position: fixed;
+    top: 8px;
+    left: 8px;
+    width: auto;
+    height: auto;
+    padding: 12px 24px;
+    background: #000;
+    color: #fff;
+    z-index: 9999;
+    border-radius: 4px;
+    font-size: 14px;
 }
 
-/* Typography utilities */
-.letter-spacing-tight { letter-spacing: -0.02em; }
-.editorial-line-height { line-height: 1.6; }
+/* Background textures — drawn in the accent colour so the third colour reads as atmosphere, not just buttons */
+/* Light pages: fine dot grid that starts behind the hero and fades out across the sections below it */
+.texture-dots-page {
+    background-image: radial-gradient(circle at 1px 1px, rgba(31,95,74,0.45) 1px, transparent 0);
+    background-size: 22px 22px;
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 30%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 0%, black 30%, transparent 100%);
+}
+/* Hero-only variant (blog): same grid, fades out within the hero */
+.texture-dots-hero {
+    background-image: radial-gradient(circle at 1px 1px, rgba(31,95,74,0.45) 1px, transparent 0);
+    background-size: 22px 22px;
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 35%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 0%, black 35%, transparent 100%);
+}
+/* Dark sections: same grid in a lighter accent so it shows on black */
+.texture-dots-accent {
+    background-image: radial-gradient(circle at 2px 2px, #3F9A78 1.2px, transparent 0);
+    background-size: 28px 28px;
+    opacity: 0.55;
+}
 
 /* Page entrance animation */
 @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(12px); }
+    from { opacity: 0; transform: translateY(30px); }
     to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes revealImage {
+    from { clip-path: inset(100% 0 0 0); }
+    to { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes slideRight {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(300%); }
 }
 
 main {
@@ -118,3 +132,7 @@ main.swap-in {
     transition: opacity 0.4s ease;
 }
 
+/* Scroll-reveal for reference design pages */
+.scroll-reveal {
+    opacity: 0;
+}

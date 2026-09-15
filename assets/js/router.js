@@ -1,9 +1,4 @@
 (function () {
-  var ACTIVE_DESKTOP = 'font-serif text-lg tracking-tight text-neutral-900 font-semibold border-b-2 border-neutral-900 pb-1';
-  var INACTIVE_DESKTOP = 'font-serif text-lg tracking-tight text-neutral-500 hover:text-neutral-800 transition-colors';
-  var ACTIVE_MOBILE = 'flex flex-col items-center justify-center text-neutral-900';
-  var INACTIVE_MOBILE = 'flex flex-col items-center justify-center text-neutral-400 hover:text-neutral-900';
-
   /* ── Scroll-reveal observer ── */
   var observer = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
@@ -25,11 +20,42 @@
   // Reveal sections on initial page load
   observeSections(document.querySelector('main') || document.body);
 
+  /* ── Platform-aware app store links ── */
+  var APP_STORE = 'https://apps.apple.com/nz/app/tapara/id6780735201';
+  var PLAY_STORE = 'https://play.google.com/store/apps/details?id=co.tapara';
+  var IS_ANDROID = /android/i.test(navigator.userAgent);
+  function applyStoreLinks(root) {
+    (root || document).querySelectorAll('a[data-store-link]').forEach(function (a) {
+      a.setAttribute('href', IS_ANDROID ? PLAY_STORE : APP_STORE);
+    });
+  }
+  applyStoreLinks(document);
+
+  /* ── Mobile menu ── */
+  function setMenu(open) {
+    var panel = document.getElementById('mobile-menu');
+    var btn = document.querySelector('[data-menu-toggle]');
+    if (!panel || !btn) return;
+    panel.classList.toggle('hidden', !open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    var icon = btn.querySelector('[data-menu-icon]');
+    if (icon) icon.textContent = open ? 'close' : 'menu';
+  }
+  document.addEventListener('click', function (e) {
+    var toggle = e.target.closest('[data-menu-toggle]');
+    if (toggle) { e.preventDefault(); setMenu(toggle.getAttribute('aria-expanded') !== 'true'); return; }
+    if (e.target.closest('#mobile-menu a')) setMenu(false);
+  });
+  window.addEventListener('resize', function () { if (window.innerWidth >= 1024) setMenu(false); });
+
   /* ── SPA router ── */
   var ROUTE_MAP = {
-    '/': '/', '/consumers': '/consumers', '/businesses': '/businesses',
-    '/merchants': '/businesses',
-    '/platform': '/platform', '/contact': '/contact',
+    '/': '/', '/about': '/about',
+    '/consumers': '/customers', '/customers': '/customers',
+    '/businesses': '/businesses', '/merchants': '/businesses',
+    '/how-it-works': '/about', '/platform': '/about',
+    '/contact': '/contact',
     '/terms': '/terms', '/consumer-terms': '/consumer-terms',
     '/privacy': '/privacy',
     '/merchant-agreement': '/merchant-agreement',
@@ -51,29 +77,6 @@
     if (path === '/') return u.origin + '/index.html';
     if (!/\.html$/.test(path)) return u.origin + path + '.html';
     return url;
-  }
-
-  function updateNav(page) {
-    var desktopNav = document.querySelector('nav .hidden.md\\:flex');
-    if (desktopNav) {
-      desktopNav.querySelectorAll('a[href]').forEach(function (a) {
-        var target = a.getAttribute('href') === page ? ACTIVE_DESKTOP : INACTIVE_DESKTOP;
-        if (a.className !== target) a.className = target;
-      });
-    }
-    var mobileNav = document.querySelector('.md\\:hidden.fixed.bottom-0');
-    if (mobileNav) {
-      mobileNav.querySelectorAll('a[href]').forEach(function (a) {
-        var isActive = a.getAttribute('href') === page;
-        var target = isActive ? ACTIVE_MOBILE : INACTIVE_MOBILE;
-        if (a.className !== target) a.className = target;
-        var label = a.querySelector('span:last-child');
-        if (label) {
-          label.classList.toggle('font-bold', isActive);
-          label.classList.toggle('font-medium', !isActive);
-        }
-      });
-    }
   }
 
   function reloadIframes(container) {
@@ -107,7 +110,25 @@
     try { xhr.send(); } catch (e) { callback(e); }
   }
 
+  function updateActiveNav(page) {
+    var navLinks = document.querySelectorAll('header nav a[href]');
+    navLinks.forEach(function (link) {
+      var href = link.getAttribute('href').replace(/\/$/, '') || '/';
+      var isActive = (href === page) || (href === '/businesses' && page === '/businesses') || (href === '/customers' && page === '/customers');
+      if (isActive) {
+        link.classList.remove('text-on-surface-variant', 'font-medium');
+        link.classList.add('text-primary', 'font-bold');
+        link.setAttribute('aria-current', 'page');
+      } else {
+        link.classList.remove('font-bold');
+        link.classList.add('text-on-surface-variant', 'font-medium');
+        link.removeAttribute('aria-current');
+      }
+    });
+  }
+
   function navigate(url, pushState) {
+    setMenu(false);
     var page = pageFromUrl(url);
     var fetchUrl = toHtmlUrl(location.origin + page);
     var displayUrl = page === '/' ? '/' : page;
@@ -142,8 +163,9 @@
         var od = document.querySelector('meta[name="description"]');
         if (nd && od) od.setAttribute('content', nd.getAttribute('content'));
 
-        updateNav(page);
         runPageScripts(newMain);
+        applyStoreLinks(newMain);
+        updateActiveNav(page);
         if (pushState) history.pushState({ page: page }, '', displayUrl);
         window.scrollTo(0, 0);
       }, 150);
@@ -163,7 +185,7 @@
     var href = a.getAttribute('href');
     if (!href || href === '#' || href.charAt(0) === '#') return;
     if (href.indexOf('://') !== -1 && href.indexOf(location.origin) !== 0) return;
-    var clean = href.replace(/\.html$/, '').replace(/\/index$/, '/');
+    var clean = href.replace(/\.html$/, '').replace(/\/index$/, '/').replace(/#.*$/, '');
     if (!(clean in ROUTE_MAP) && clean.indexOf('/blog/') !== 0 && !/\.html$/.test(href)) return;
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     if (a.hasAttribute('download') || a.target === '_blank') return;

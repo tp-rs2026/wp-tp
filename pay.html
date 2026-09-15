@@ -12,10 +12,13 @@
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon_io/favicon-16x16.png"/>
 <link rel="manifest" href="/assets/favicon_io/site.webmanifest"/>
 <link rel="icon" type="image/x-icon" href="/assets/favicon_io/favicon.ico"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Noto+Serif:wght@500;600;700&display=swap" rel="stylesheet">
 </head>
-<body class="bg-surface text-on-surface font-body antialiased">
+<body class="bg-white font-body-md text-on-surface">
 
-<main class="min-h-screen flex flex-col items-center justify-center px-6 py-12">
+<main id="main-content" class="w-full pt-20 bg-white">
 <div class="w-full max-w-md">
 
 <!-- State: Loading -->
@@ -37,7 +40,7 @@
 </div>
 
 <button id="pay-button"
-class="w-full bg-primary text-white py-4 rounded-full font-sans font-medium text-lg hover:opacity-90 transition-opacity"
+class="w-full bg-accent text-on-accent py-4 rounded-md font-sans font-medium text-lg hover:opacity-90 transition-opacity"
 type="button">
 Pay
 </button>
@@ -52,7 +55,7 @@ You&rsquo;ll be redirected to authorise this payment.
 <!-- State: Already Approved -->
 <div id="state-approved" class="hidden text-center">
 <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-8">
-<span class="material-symbols-outlined text-primary text-4xl">check_circle</span>
+<span class="material-symbols-outlined text-accent text-4xl">check_circle</span>
 </div>
 <h1 class="font-serif text-3xl font-bold text-primary mb-4">Payment complete</h1>
 <p class="text-lg text-on-surface-variant leading-relaxed">
@@ -89,7 +92,7 @@ Your bank declined the payment. No money has left your account.
 </div>
 </div>
 <button id="retry-declined-button"
-class="w-full bg-primary text-white py-4 rounded-full font-sans font-medium text-lg hover:opacity-90 transition-opacity"
+class="w-full bg-accent text-on-accent py-4 rounded-md font-sans font-medium text-lg hover:opacity-90 transition-opacity"
 type="button">
 Try again
 </button>
@@ -119,7 +122,7 @@ Something went wrong with your payment. No money has left your account.
 </div>
 </div>
 <button id="retry-error-button"
-class="w-full bg-primary text-white py-4 rounded-full font-sans font-medium text-lg hover:opacity-90 transition-opacity"
+class="w-full bg-accent text-on-accent py-4 rounded-md font-sans font-medium text-lg hover:opacity-90 transition-opacity"
 type="button">
 Try again
 </button>
@@ -149,7 +152,7 @@ Your payment was cancelled.
 </div>
 </div>
 <button id="retry-cancelled-button"
-class="w-full bg-primary text-white py-4 rounded-full font-sans font-medium text-lg hover:opacity-90 transition-opacity"
+class="w-full bg-accent text-on-accent py-4 rounded-md font-sans font-medium text-lg hover:opacity-90 transition-opacity"
 type="button">
 Try again
 </button>
@@ -179,7 +182,7 @@ You exited the bank payment page. No money has left your account.
 </div>
 </div>
 <button id="retry-abandoned-button"
-class="w-full bg-primary text-white py-4 rounded-full font-sans font-medium text-lg hover:opacity-90 transition-opacity"
+class="w-full bg-accent text-on-accent py-4 rounded-md font-sans font-medium text-lg hover:opacity-90 transition-opacity"
 type="button">
 Try again
 </button>
@@ -231,7 +234,7 @@ Please wait a moment and try again.
 <p class="text-lg text-on-surface-variant leading-relaxed mb-8">
 We couldn&rsquo;t load the payment details. Check your connection and try again.
 </p>
-<button onclick="location.reload()" class="bg-primary text-white px-8 py-4 rounded-full font-sans font-medium hover:opacity-90 transition-opacity">
+<button onclick="location.reload()" class="bg-accent text-on-accent px-8 py-4 rounded-md font-sans font-medium hover:opacity-90 transition-opacity">
 Retry
 </button>
 </div>

@@ -32,6 +32,9 @@
       "Bash(git push:*)",
       "WebFetch(domain:www.akahu.nz)",
       "WebFetch(domain:developers.akahu.nz)"
+    ],
+    "additionalDirectories": [
+      "/Users/felix/development/mobile_app"
     ]
   }
 }
