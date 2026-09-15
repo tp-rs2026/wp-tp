@@ -361,7 +361,7 @@ Retry
   function renderUnavailable(data) {
     var msg = document.getElementById('unavailable-message');
     if (data.status === 'expired') msg.textContent = 'This order has expired.';
-    else if (data.status === 'cancelled') msg.textContent = 'This order was cancelled by the merchant.';
+    else if (data.status === 'cancelled') msg.textContent = 'This order was cancelled by the business.';
     else if (data.status === 'declined') msg.textContent = 'This payment request was declined.';
     else msg.textContent = 'This payment request is no longer available.';
     showState('unavailable');

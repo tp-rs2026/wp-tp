@@ -176,7 +176,7 @@ You&rsquo;ll be redirected to authorise this payment.
 </div>
 <h1 class="font-serif text-3xl font-bold text-primary mb-4">Order cancelled</h1>
 <p id="unavailable-message" class="text-lg text-on-surface-variant leading-relaxed">
-This order was cancelled by the merchant. No money has left your account.
+This order was cancelled by the business. No money has left your account.
 </p>
 </div>
 
@@ -375,7 +375,7 @@ We couldn&rsquo;t find a payment to check. The link may be invalid.
     var msg = document.getElementById('unavailable-message');
     if (data.status === 'expired') msg.textContent = 'This order has expired.';
     else if (data.status === 'declined') msg.textContent = 'This payment request was declined.';
-    else msg.textContent = 'This order was cancelled by the merchant. No money has left your account.';
+    else msg.textContent = 'This order was cancelled by the business. No money has left your account.';
     showState('unavailable');
   }
 
