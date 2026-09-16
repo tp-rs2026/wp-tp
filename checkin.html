@@ -69,7 +69,6 @@ Get the free app, sign up, then scan the code again.
 </a>
 </div>
 <p class="text-sm text-outline mt-8">Already have the app? Open it, then scan the code again.</p>
-<p id="invalid-note" class="hidden text-sm text-outline mt-4">This code doesn&rsquo;t look right. Ask the business for a fresh one.</p>
 </div>
 </div>
 </main>
@@ -119,11 +118,6 @@ Get the free app, sign up, then scan the code again.
     wrap.insertBefore(document.getElementById('store-android'), document.getElementById('store-ios'));
   }
 
-  // Flag a malformed pad id so the customer asks for a fresh code.
-  var params = new URLSearchParams(window.location.search);
-  var padId = params.get('merchant_id') || '';
-  var valid = /^c[a-z0-9]{24,30}$/.test(padId);
-  if (!valid) document.getElementById('invalid-note').classList.remove('hidden');
 })();
 </script>
 <script src="/assets/js/router.js"></script>
