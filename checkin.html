@@ -68,7 +68,7 @@ Get the free app, sign up, then scan the code again.
 <img src="/assets/images/download_on_google_play.png" alt="Get it on Google Play" class="h-14">
 </a>
 </div>
-<p class="text-sm text-outline mt-8">Already have the app? Open it and scan the code again, or <a id="open-app-link" href="#" class="text-primary font-medium hover:opacity-70 transition-opacity">try opening this link in tapara</a>.</p>
+<p class="text-sm text-outline mt-8">Already have the app? Open it, then scan the code again.</p>
 <p id="invalid-note" class="hidden text-sm text-outline mt-4">This code doesn&rsquo;t look right. Ask the business for a fresh one.</p>
 </div>
 </div>
@@ -119,13 +119,11 @@ Get the free app, sign up, then scan the code again.
     wrap.insertBefore(document.getElementById('store-android'), document.getElementById('store-ios'));
   }
 
-  // Keep the pad in the link so a re-open after install still carries it.
+  // Flag a malformed pad id so the customer asks for a fresh code.
   var params = new URLSearchParams(window.location.search);
   var padId = params.get('merchant_id') || '';
   var valid = /^c[a-z0-9]{24,30}$/.test(padId);
   if (!valid) document.getElementById('invalid-note').classList.remove('hidden');
-  var openLink = document.getElementById('open-app-link');
-  openLink.href = window.location.href;
 })();
 </script>
 <script src="/assets/js/router.js"></script>
