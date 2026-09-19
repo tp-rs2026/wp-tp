@@ -10,8 +10,11 @@
 var path = location.pathname.replace(/\/$/, '') || '/';
 var payMatch = path.match(/^\/pay\/(.+)$/);
 if (payMatch) {
-  sessionStorage.setItem('pay-request-id', payMatch[1]);
-  location.replace('/pay');
+  // Keep the id in the URL so a reload, a back-swipe or a reopened tab still
+  // finds the payment. Session storage stays as a fallback for older tabs.
+  var payId = payMatch[1];
+  sessionStorage.setItem('pay-request-id', payId);
+  location.replace('/pay?pr=' + encodeURIComponent(payId));
 } else {
   var routes = { '/': '/', '/consumers': '/', '/customers': '/', '/businesses': '/', '/merchants': '/', '/about': '/', '/how-it-works': '/', '/platform': '/', '/contact': '/', '/blog': '/', '/delete-account': '/' };
   if (path in routes || path.indexOf('/blog/') === 0) {

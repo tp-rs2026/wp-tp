@@ -254,8 +254,13 @@ Retry
 <script>
 (function () {
   var API_BASE = 'https://api.tapara.co.nz';
-  var requestId = sessionStorage.getItem('pay-request-id');
-  sessionStorage.removeItem('pay-request-id');
+  // The id lives in the URL (/pay?pr=...) so a reload still finds the payment.
+  // Session storage is only a fallback for a tab that arrived via the old redirect.
+  var requestId = new URLSearchParams(window.location.search).get('pr')
+    || sessionStorage.getItem('pay-request-id');
+  if (requestId && !window.location.search) {
+    history.replaceState(null, '', '/pay?pr=' + encodeURIComponent(requestId));
+  }
 
   // Close older payment tabs when a new QR code is scanned
   var channel = new BroadcastChannel('tapara-pay');
