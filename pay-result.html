@@ -330,7 +330,7 @@ We couldn&rsquo;t find a payment to check. The link may be invalid.
 
         if (tx === 'cancelled') {
           clearInterval(pollTimer);
-          showFailed('Your payment was cancelled.', data);
+          showFailed('No payment has been made. Try again if you wish to pay.', data);
           return;
         }
 
