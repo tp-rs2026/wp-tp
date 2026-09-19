@@ -17,9 +17,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Noto+Serif:wght@500;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="bg-white font-body-md text-on-surface">
+<header class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-[16px] border-b border-outline-variant/30">
+<div class="h-20 max-w-[1200px] mx-auto px-md flex items-center justify-between">
+<a class="font-headline-md font-bold text-[20px] lg:text-[24px] text-primary" href="/">Tapara</a>
+<span class="text-body-sm text-on-surface-variant">Secure payment</span>
+</div>
+</header>
 
-<main id="main-content" class="w-full pt-20 bg-white">
-<div class="w-full max-w-md">
+<main id="main-content" class="w-full pt-20 bg-white relative isolate">
+<section class="relative min-h-[calc(100vh-5rem)] px-6 py-12 flex items-center justify-center overflow-hidden isolate">
+<div class="absolute inset-0 -z-10 texture-dots-hero pointer-events-none" aria-hidden="true"></div>
+<div class="w-full max-w-md relative z-10">
 
 <!-- State: Loading -->
 <div id="state-loading" class="text-center">
@@ -29,18 +37,18 @@
 
 <!-- State: Order Summary (pending) -->
 <div id="state-pending" class="hidden">
-<p id="business-name" class="font-serif text-2xl font-bold text-center mb-8"></p>
+<p id="business-name" class="font-headline text-2xl font-bold text-center mb-8"></p>
 
-<div class="bg-white border border-outline-variant rounded-3xl p-6 mb-6">
+<div class="bg-white border border-outline-variant/30 rounded-2xl p-6 mb-6 shadow-lg">
 <div id="items-list" class="space-y-3"></div>
-<div class="border-t border-outline-variant mt-4 pt-4 flex justify-between items-center">
-<span class="font-sans font-medium text-on-surface">Total</span>
-<span id="order-total" class="font-serif text-2xl font-bold text-primary"></span>
+<div class="border-t border-outline-variant/30 mt-4 pt-4 flex justify-between items-center">
+<span class="font-body font-medium text-on-surface">Total</span>
+<span id="order-total" class="font-headline text-2xl font-bold text-primary"></span>
 </div>
 </div>
 
 <button id="pay-button"
-class="w-full bg-accent text-on-accent py-4 rounded-md font-sans font-medium text-lg hover:opacity-90 transition-opacity"
+class="w-full bg-accent text-on-accent py-4 rounded-md font-body font-semibold text-lg shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all active:scale-95"
 type="button">
 Pay
 </button>
@@ -57,7 +65,7 @@ You&rsquo;ll be redirected to authorise this payment.
 <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-8">
 <span class="material-symbols-outlined text-accent text-4xl">check_circle</span>
 </div>
-<h1 class="font-serif text-3xl font-bold text-primary mb-4">Payment complete</h1>
+<h1 class="font-headline text-3xl font-bold text-primary mb-4">Payment complete</h1>
 <p class="text-lg text-on-surface-variant leading-relaxed">
 Your payment to <strong id="approved-business"></strong> has been confirmed.
 </p>
@@ -66,7 +74,7 @@ Your payment to <strong id="approved-business"></strong> has been confirmed.
 <!-- State: In Progress (TX in-flight) -->
 <div id="state-in-progress" class="hidden text-center">
 <div class="w-10 h-10 border-2 border-outline-variant border-t-primary rounded-full animate-spin mx-auto mb-6"></div>
-<h1 class="font-serif text-3xl font-bold text-primary mb-4">Payment in progress</h1>
+<h1 class="font-headline text-3xl font-bold text-primary mb-4">Payment in progress</h1>
 <p class="text-lg text-on-surface-variant leading-relaxed">
 Your payment is being processed by the bank. You can close this page.
 </p>
@@ -78,21 +86,21 @@ Your payment is being processed by the bank. You can close this page.
 <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-8">
 <span class="material-symbols-outlined text-primary text-4xl">credit_card_off</span>
 </div>
-<h1 class="font-serif text-3xl font-bold text-primary mb-4">Payment declined</h1>
+<h1 class="font-headline text-3xl font-bold text-primary mb-4">Payment declined</h1>
 <p class="text-lg text-on-surface-variant leading-relaxed">
 Your bank declined the payment. No money has left your account.
 </p>
 </div>
-<p id="retry-declined-business" class="font-serif text-2xl font-bold text-center mb-8"></p>
-<div class="bg-white border border-outline-variant rounded-3xl p-6 mb-6">
+<p id="retry-declined-business" class="font-headline text-2xl font-bold text-center mb-8"></p>
+<div class="bg-white border border-outline-variant/30 rounded-2xl p-6 mb-6 shadow-lg">
 <div id="retry-declined-items" class="space-y-3"></div>
-<div class="border-t border-outline-variant mt-4 pt-4 flex justify-between items-center">
-<span class="font-sans font-medium text-on-surface">Total</span>
-<span id="retry-declined-total" class="font-serif text-2xl font-bold text-primary"></span>
+<div class="border-t border-outline-variant/30 mt-4 pt-4 flex justify-between items-center">
+<span class="font-body font-medium text-on-surface">Total</span>
+<span id="retry-declined-total" class="font-headline text-2xl font-bold text-primary"></span>
 </div>
 </div>
 <button id="retry-declined-button"
-class="w-full bg-accent text-on-accent py-4 rounded-md font-sans font-medium text-lg hover:opacity-90 transition-opacity"
+class="w-full bg-accent text-on-accent py-4 rounded-md font-body font-semibold text-lg shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all active:scale-95"
 type="button">
 Try again
 </button>
@@ -108,21 +116,21 @@ You&rsquo;ll be redirected to authorise this payment.
 <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-8">
 <span class="material-symbols-outlined text-primary text-4xl">error</span>
 </div>
-<h1 class="font-serif text-3xl font-bold text-primary mb-4">Something went wrong</h1>
+<h1 class="font-headline text-3xl font-bold text-primary mb-4">Something went wrong</h1>
 <p class="text-lg text-on-surface-variant leading-relaxed">
 Something went wrong with your payment. No money has left your account.
 </p>
 </div>
-<p id="retry-error-business" class="font-serif text-2xl font-bold text-center mb-8"></p>
-<div class="bg-white border border-outline-variant rounded-3xl p-6 mb-6">
+<p id="retry-error-business" class="font-headline text-2xl font-bold text-center mb-8"></p>
+<div class="bg-white border border-outline-variant/30 rounded-2xl p-6 mb-6 shadow-lg">
 <div id="retry-error-items" class="space-y-3"></div>
-<div class="border-t border-outline-variant mt-4 pt-4 flex justify-between items-center">
-<span class="font-sans font-medium text-on-surface">Total</span>
-<span id="retry-error-total" class="font-serif text-2xl font-bold text-primary"></span>
+<div class="border-t border-outline-variant/30 mt-4 pt-4 flex justify-between items-center">
+<span class="font-body font-medium text-on-surface">Total</span>
+<span id="retry-error-total" class="font-headline text-2xl font-bold text-primary"></span>
 </div>
 </div>
 <button id="retry-error-button"
-class="w-full bg-accent text-on-accent py-4 rounded-md font-sans font-medium text-lg hover:opacity-90 transition-opacity"
+class="w-full bg-accent text-on-accent py-4 rounded-md font-body font-semibold text-lg shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all active:scale-95"
 type="button">
 Try again
 </button>
@@ -138,21 +146,21 @@ You&rsquo;ll be redirected to authorise this payment.
 <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-8">
 <span class="material-symbols-outlined text-primary text-4xl">cancel</span>
 </div>
-<h1 class="font-serif text-3xl font-bold text-primary mb-4">Payment cancelled</h1>
+<h1 class="font-headline text-3xl font-bold text-primary mb-4">Payment cancelled</h1>
 <p class="text-lg text-on-surface-variant leading-relaxed">
 Your payment was cancelled.
 </p>
 </div>
-<p id="retry-cancelled-business" class="font-serif text-2xl font-bold text-center mb-8"></p>
-<div class="bg-white border border-outline-variant rounded-3xl p-6 mb-6">
+<p id="retry-cancelled-business" class="font-headline text-2xl font-bold text-center mb-8"></p>
+<div class="bg-white border border-outline-variant/30 rounded-2xl p-6 mb-6 shadow-lg">
 <div id="retry-cancelled-items" class="space-y-3"></div>
-<div class="border-t border-outline-variant mt-4 pt-4 flex justify-between items-center">
-<span class="font-sans font-medium text-on-surface">Total</span>
-<span id="retry-cancelled-total" class="font-serif text-2xl font-bold text-primary"></span>
+<div class="border-t border-outline-variant/30 mt-4 pt-4 flex justify-between items-center">
+<span class="font-body font-medium text-on-surface">Total</span>
+<span id="retry-cancelled-total" class="font-headline text-2xl font-bold text-primary"></span>
 </div>
 </div>
 <button id="retry-cancelled-button"
-class="w-full bg-accent text-on-accent py-4 rounded-md font-sans font-medium text-lg hover:opacity-90 transition-opacity"
+class="w-full bg-accent text-on-accent py-4 rounded-md font-body font-semibold text-lg shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all active:scale-95"
 type="button">
 Try again
 </button>
@@ -168,21 +176,21 @@ You&rsquo;ll be redirected to authorise this payment.
 <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-8">
 <span class="material-symbols-outlined text-primary text-4xl">logout</span>
 </div>
-<h1 class="font-serif text-3xl font-bold text-primary mb-4">Payment not completed</h1>
+<h1 class="font-headline text-3xl font-bold text-primary mb-4">Payment not completed</h1>
 <p class="text-lg text-on-surface-variant leading-relaxed">
 You exited the bank payment page. No money has left your account.
 </p>
 </div>
-<p id="retry-abandoned-business" class="font-serif text-2xl font-bold text-center mb-8"></p>
-<div class="bg-white border border-outline-variant rounded-3xl p-6 mb-6">
+<p id="retry-abandoned-business" class="font-headline text-2xl font-bold text-center mb-8"></p>
+<div class="bg-white border border-outline-variant/30 rounded-2xl p-6 mb-6 shadow-lg">
 <div id="retry-abandoned-items" class="space-y-3"></div>
-<div class="border-t border-outline-variant mt-4 pt-4 flex justify-between items-center">
-<span class="font-sans font-medium text-on-surface">Total</span>
-<span id="retry-abandoned-total" class="font-serif text-2xl font-bold text-primary"></span>
+<div class="border-t border-outline-variant/30 mt-4 pt-4 flex justify-between items-center">
+<span class="font-body font-medium text-on-surface">Total</span>
+<span id="retry-abandoned-total" class="font-headline text-2xl font-bold text-primary"></span>
 </div>
 </div>
 <button id="retry-abandoned-button"
-class="w-full bg-accent text-on-accent py-4 rounded-md font-sans font-medium text-lg hover:opacity-90 transition-opacity"
+class="w-full bg-accent text-on-accent py-4 rounded-md font-body font-semibold text-lg shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all active:scale-95"
 type="button">
 Try again
 </button>
@@ -197,7 +205,7 @@ You&rsquo;ll be redirected to authorise this payment.
 <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-8">
 <span class="material-symbols-outlined text-primary text-4xl">block</span>
 </div>
-<h1 class="font-serif text-3xl font-bold text-primary mb-4">Payment unavailable</h1>
+<h1 class="font-headline text-3xl font-bold text-primary mb-4">Payment unavailable</h1>
 <p id="unavailable-message" class="text-lg text-on-surface-variant leading-relaxed">
 This payment request is no longer available.
 </p>
@@ -208,7 +216,7 @@ This payment request is no longer available.
 <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-8">
 <span class="material-symbols-outlined text-primary text-4xl">search_off</span>
 </div>
-<h1 class="font-serif text-3xl font-bold text-primary mb-4">Not found</h1>
+<h1 class="font-headline text-3xl font-bold text-primary mb-4">Not found</h1>
 <p class="text-lg text-on-surface-variant leading-relaxed">
 We couldn&rsquo;t find this payment request. The link may be incorrect.
 </p>
@@ -219,7 +227,7 @@ We couldn&rsquo;t find this payment request. The link may be incorrect.
 <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-8">
 <span class="material-symbols-outlined text-primary text-4xl">hourglass_top</span>
 </div>
-<h1 class="font-serif text-3xl font-bold text-primary mb-4">Too many requests</h1>
+<h1 class="font-headline text-3xl font-bold text-primary mb-4">Too many requests</h1>
 <p class="text-lg text-on-surface-variant leading-relaxed">
 Please wait a moment and try again.
 </p>
@@ -230,16 +238,17 @@ Please wait a moment and try again.
 <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-8">
 <span class="material-symbols-outlined text-primary text-4xl">wifi_off</span>
 </div>
-<h1 class="font-serif text-3xl font-bold text-primary mb-4">Something went wrong</h1>
+<h1 class="font-headline text-3xl font-bold text-primary mb-4">Something went wrong</h1>
 <p class="text-lg text-on-surface-variant leading-relaxed mb-8">
 We couldn&rsquo;t load the payment details. Check your connection and try again.
 </p>
-<button onclick="location.reload()" class="bg-accent text-on-accent px-8 py-4 rounded-md font-sans font-medium hover:opacity-90 transition-opacity">
+<button onclick="location.reload()" class="bg-accent text-on-accent px-8 py-4 rounded-md font-body font-semibold shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all active:scale-95">
 Retry
 </button>
 </div>
 
 </div>
+</section>
 </main>
 
 <script>
